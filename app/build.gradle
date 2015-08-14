@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "net.techredesign.uxfortips"
+        applicationId "net.techredesign.uxfortipsNEW"
         minSdkVersion 21
         targetSdkVersion 22
         versionCode 3

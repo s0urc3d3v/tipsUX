@@ -18,16 +18,17 @@ import java.text.DecimalFormat;
 
 public class MainActivity extends Activity {
 
-    double percent = 0.2;
-    String tipMod = "";
-    double n = 0;
+    EditText e;
+    TextView t;
+    AlertDialog dialog;
+    int percent = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        e = (EditText) findViewById(R.id.editText);
+        t = (TextView) findViewById(R.id.textView);
     }
 
     @Override
@@ -48,126 +49,90 @@ public class MainActivity extends Activity {
         if (id == R.id.action_settings) {
             return true;
         }
-
-
-        switch (item.getItemId()) {
-            case (R.id.ammount)
-                    : {
-
-                final int in = 0;
-
-                //use a
-                final EditText input = new EditText(this);
-                input.setHint("%__");
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-
-                new AlertDialog.Builder(this)
-
-                        .setTitle("Enter ammount")
-                        .setView(input)
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.cancel();
-                            }
-                        })
-                        .setPositiveButton("use", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-
-                                tipMod = input.getText().toString();
-                                percent = Double.valueOf(tipMod)
-                                        * 0.01
-                                ;
-
-                                Toast.makeText(getApplicationContext(), "Using " + tipMod + "%", Toast.LENGTH_LONG).show();
-                            }
-
-                        }).show();
-                break;
-            }
-
-            case(R.id.total):
-                getTotal();
-                new AlertDialog.Builder(this)
-                        .setTitle(getTotal().toString())
-                .show();
-
+        switch (item.getItemId()){
+            case R.id.tipPercentageMenuItem:
+                getPercentage();
+                return true;
+            case R.id.mainActivitySettings:
+                openSettings();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
-
-
     }
 
-
-
-
-    public void calc(View view)
-    {
-        Log.w("Ran", "Func");
-        getTip(percent);
-    }
-
-    public double getTip(double percent)
-    {
-        EditText e = (EditText) findViewById(R.id.editText);
-        TextView t = (TextView) findViewById(R.id.textView);
-
-
-        if (e != null )
-        {
-            Log.w("Not", "null");
+    public void calc(View view) {
+        double subtotal = 0;
+        double tip = calculateTip();
+        if (tip != -1) {
             try {
-                n = Double.valueOf(e.getText().toString())
-                        ;
-                DecimalFormat df = new DecimalFormat("#.##");
-                df.format(n);
+                subtotal = Double.valueOf(e.getText().toString());
+            } catch (Exception conversionError) {
+                conversionError.printStackTrace();
+                Toast.makeText(getApplicationContext(), "invalid subtotal", Toast.LENGTH_LONG).show();
             }
-            catch (Exception e5)
-            {
-                Toast.makeText(getApplicationContext(), "That is not a number", Toast.LENGTH_SHORT)
-                        .show();
-            }
-            double tip = findTip(n, percent);
-
-            t.setText("$" + String.valueOf(tip));
-        }
-        else
-        {
-            Toast.makeText(getApplicationContext(), "You need to enter an amount", Toast.LENGTH_LONG).show();
+            setValues(tip, calculateTotal(subtotal, tip));
+        } else {
+            Log.w("input invalid", "NOT A NUMBER [INT]");
 
         }
+    }
 
 
-
-
-
-    return  0;
+    public double calculateTip() {  //will return -1 if try failed
+            try {
+                final Double subtotal = Double.valueOf(e.getText().toString());
+                return subtotal * (percent * 0.01);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(), "That is not a number :)", Toast.LENGTH_SHORT).show();
+                return -1;
+            }
 
     }
 
-    public double findTip(double in, double percent)
+    public double calculateTotal(double subtotal, double tip){return subtotal + tip;}
+
+    public void getPercentage()
     {
-
-        DecimalFormat df = new DecimalFormat("#.##")
-                ;
-        return Double.parseDouble(df.format(in * percent)); //This line might break all the things
-
+        final EditText percentage = new EditText(this);
+        percentage.setHint("%");
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setIcon(getDrawable(R.drawable.ic_attach_money_black_18dp))
+                .setView(percentage)
+                .setPositiveButton(R.string.percentagePositiveButtonPrompt, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        /**
+                         * Get new percentage or fall back to a Toast prompt for the user
+                         */
+                        try {percent = Integer.valueOf(percentage.getText().toString());}
+                        catch (Exception invalidNumberException) {
+                            invalidNumberException.printStackTrace();
+                            Toast.makeText(getApplicationContext(), "Please enter a valid percentage", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dismissView();
+                    }
+                });
+        dialog = builder.create();
+        dialog.show();
     }
 
-
-
-    public void change(int i)
-    {
-        Toast.makeText(getApplicationContext(), "COMING S O O N ™", Toast.LENGTH_LONG).show();
+    public void dismissView(){ //workaround :(
+        dialog.dismiss();
+    }
+    public void setValues(double tip, double total){
+        DecimalFormat decimalFormatter = new DecimalFormat("#.00");
+        t.setText("tip: $" + decimalFormatter.format(tip) +  "    total: $" + decimalFormatter.format(total));
     }
 
-    public Double getTotal(){
-        Double n = getTip(percent); EditText e = (EditText) findViewById(R.id.editText);
-        return n = n * Double.parseDouble(e.getText().toString());
-
-
-
-
+    public void openSettings(){
+        startActivity(new Intent(this, settings.class));
     }
+
 }
