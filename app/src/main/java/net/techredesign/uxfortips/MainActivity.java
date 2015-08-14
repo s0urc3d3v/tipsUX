@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.text.DecimalFormat;
 
 public class MainActivity extends Activity {
@@ -69,7 +67,7 @@ public class MainActivity extends Activity {
                 subtotal = Double.valueOf(e.getText().toString());
             } catch (Exception conversionError) {
                 conversionError.printStackTrace();
-                Toast.makeText(getApplicationContext(), "invalid subtotal", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.invalidSubtotalWarning, Toast.LENGTH_LONG).show();
             }
             setValues(tip, calculateTotal(subtotal, tip));
         } else {
@@ -85,7 +83,7 @@ public class MainActivity extends Activity {
                 return subtotal * (percent * 0.01);
             } catch (Exception e) {
                 e.printStackTrace();
-                Toast.makeText(getApplicationContext(), "That is not a number :)", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.invalidStringWarning, Toast.LENGTH_SHORT).show();
                 return -1;
             }
 
@@ -109,7 +107,7 @@ public class MainActivity extends Activity {
                         try {percent = Integer.valueOf(percentage.getText().toString());}
                         catch (Exception invalidNumberException) {
                             invalidNumberException.printStackTrace();
-                            Toast.makeText(getApplicationContext(), "Please enter a valid percentage", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), R.string.pleaseEnterValidPercent, Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
@@ -128,7 +126,7 @@ public class MainActivity extends Activity {
     }
     public void setValues(double tip, double total){
         DecimalFormat decimalFormatter = new DecimalFormat("#.00");
-        t.setText("tip: $" + decimalFormatter.format(tip) +  "    total: $" + decimalFormatter.format(total));
+        t.setText(getString(R.string.tipView)+ decimalFormatter.format(tip) + "\n" +  getString(R.string.totalView) + decimalFormatter.format(total));
     }
 
     public void openSettings(){

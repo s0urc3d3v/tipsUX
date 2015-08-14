@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">TipsUX</string>
-
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="welcome">Calculate your tip</string>
@@ -9,5 +8,10 @@
     <string name="settingsWelcome">Coming soon</string>
     <string name="total">Total</string>
     <string name="cancel">Cancel</string>
+    <string name="pleaseEnterValidPercent">Please enter a valid percentage</string>
+    <string name="invalidStringWarning">That is not a number :)</string>
+    <string name="invalidSubtotalWarning">Invalid subtotal</string>
+    <string name="tipView">Tip: $</string>
+    <string name="totalView">Total: $</string>
 </resources>
 
