@@ -13,5 +13,21 @@
     <string name="invalidSubtotalWarning">Invalid subtotal</string>
     <string name="tipView">Tip: $</string>
     <string name="totalView">Total: $</string>
+    <string name="saveMySpendings">Save my spendings BETA</string>
+    <string name="givePathPrompt">Save spendings to file [ALPHA -app may crash]</string>
+    <string name="saveToFile">Save spendings to file</string>
+    <string name="filename">spendings.txt</string>
+    <string name="errorGettingDirectory">Error: could not get directory</string>
+    <string name="externalStorageNotWritableError">Internal storage does not seem to be writable; However it is readable.  Try rebooting?</string>
+    <string name="externalStorageNotAccessable">Your internal storage is not writable.  This permission is required to save your spendings</string>
+    <string name="writeError">Error: could not write to external storage</string>
+    <string name="tipPromptForFile">Tip:</string>
+    <string name="totalPromptForFile">Total:</string>
+    <string name="tab">    </string>
+    <string name="lineFormatting">----------------------------------------------------------</string>
+    <string name="spendingHeader">Here are your spendings</string>
+    <string name="fileClaimsToExistButCanBeFound">Sorry: the file claims to exist but can not be found</string>
+    <string name="writeFinished">File has been written to your documents folder</string>
 </resources>
+
 

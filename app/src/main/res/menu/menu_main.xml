@@ -13,13 +13,12 @@
         android:id="@+id/tipPercentageMenuItem"
         android:orderInCategory="1"
         />
-
-    <item android:id="@+id/total"
-        android:title="@string/total"
-        android:visible="true"
-        android:showAsAction="never"
+    <item
         android:orderInCategory="2"
-        />
+        android:title="@string/saveMySpendings"
+        android:icon="@drawable/ic_attach_file_black_24dp"
+        android:showAsAction="ifRoom"
+        android:id="@+id/spendingsMenuItem"/>
 
 
 </menu>
