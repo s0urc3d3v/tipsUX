@@ -34,7 +34,7 @@
         android:id="@+id/imageButton"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:src="@drawable/ic_check_black_18dp"
+        android:src="@drawable/ic_check_black_24dp"
         android:tint="@android:color/white"
         android:background="@drawable/ripple_oval"
         android:stateListAnimator="@anim/animation"
