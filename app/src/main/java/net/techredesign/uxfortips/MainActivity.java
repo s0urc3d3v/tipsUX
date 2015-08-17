@@ -15,6 +15,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,6 +26,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends Activity {
 
@@ -33,6 +40,9 @@ public class MainActivity extends Activity {
     String path = "";
     double tip;
     double subtotal;
+    double total;
+
+    private List<FloatingActionMenu> menus = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +50,15 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         e = (EditText) findViewById(R.id.editText);
         t = (TextView) findViewById(R.id.textView);
+
+        FloatingActionMenu menu1 = (FloatingActionMenu) findViewById(R.id.FABMenu);
+        menus.add(menu1);
+        menu1.setClosedOnTouchOutside(true);
+        menu1.setIconAnimated(false);
+
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -58,14 +76,11 @@ public class MainActivity extends Activity {
             return true;
         }
         switch (item.getItemId()) {
-            case R.id.tipPercentageMenuItem:
-                getPercentage();
-                return true;
             case R.id.mainActivitySettings:
                 openSettings();
                 return true;
-            case R.id.spendingsMenuItem:
-                saveMySpendings();
+            case R.id.creditsItem:
+                showCreditsView();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -109,7 +124,7 @@ public class MainActivity extends Activity {
         final EditText percentage = new EditText(this);
         percentage.setHint("%");
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                .setIcon(getDrawable(R.drawable.ic_attach_money_black_18dp))
+                .setIcon(R.drawable.ic_attach_money)
                 .setView(percentage)
                 .setPositiveButton(R.string.percentagePositiveButtonPrompt, new DialogInterface.OnClickListener() {
                     @Override
@@ -156,20 +171,24 @@ public class MainActivity extends Activity {
                 .setPositiveButton(R.string.saveToFile, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        path = editText.getText().toString();
-                        setTipAndSubtotal();
-                        if (isExternalStorageWritable()) {
-                            if (shouldWriteBasedOnStorage()) {
-                                writeTipAndTotal();
-                                Toast.makeText(getApplicationContext(), R.string.writeFinished, Toast.LENGTH_LONG).show();
+                        setTipSubtotalAndTotal();
+                        if (tip != 0 && subtotal != 0 && total != 0) {
+                            path = editText.getText().toString();
+                            if (isExternalStorageWritable()) {
+                                if (shouldWriteBasedOnStorage()) {
+                                    writeTipAndTotal();
+                                    Toast.makeText(getApplicationContext(), R.string.writeFinished, Toast.LENGTH_LONG).show();
+                                }
+                            } else {
+                                if (isExternalStorageReadable()) {
+                                    Toast.makeText(getApplicationContext(), R.string.externalStorageNotWritableError, Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), R.string.externalStorageNotAccessable, Toast.LENGTH_LONG).show();
+
+                                }
                             }
                         } else {
-                            if (isExternalStorageReadable()) {
-                                Toast.makeText(getApplicationContext(), R.string.externalStorageNotWritableError, Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(getApplicationContext(), R.string.externalStorageNotAccessable, Toast.LENGTH_LONG).show();
-
-                            }
+                            Toast.makeText(getApplicationContext(), R.string.noSubtotalError, Toast.LENGTH_SHORT).show();;
                         }
 
 
@@ -189,13 +208,14 @@ public class MainActivity extends Activity {
         pathDialog.dismiss();
     }
 
-    public void setTipAndSubtotal() {
+    public void setTipSubtotalAndTotal() {
         try {
             subtotal = Double.valueOf(e.getText().toString());
         } catch (Exception exception) {
             exception.printStackTrace();
         }
         tip = subtotal * 0.2;
+        total = subtotal + tip;
 
 
     }
@@ -264,7 +284,6 @@ public class MainActivity extends Activity {
     }
 
     public File getSaveDirectory(String dirName){
-        //Add conditionals for path's from user
         File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), dirName);
         if (!f.mkdirs()){
             Toast.makeText(getApplicationContext(), R.string.errorGettingDirectory, Toast.LENGTH_SHORT).show();
@@ -274,23 +293,28 @@ public class MainActivity extends Activity {
     }
 
     public boolean shouldWriteBasedOnStorage() {
-        File test = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
-        StatFs statFs = new StatFs(test.getPath());
-        long blockSize = statFs.getBlockSize();
-        long avaibleBlocks = statFs.getAvailableBlocks();
-        long freeSpaceInBytes = avaibleBlocks * blockSize;
-        if (freeSpaceInBytes >= 20000000) {
-            return true;
-        }
-        return false;
+        StatFs statFs = new StatFs(Environment.getRootDirectory().getAbsolutePath());
+        long blockSize = statFs.getBlockSizeLong();
+        long availableBlocks = statFs.getAvailableBlocksLong();
+        long freeSpaceInBytes = availableBlocks * blockSize;
+        return freeSpaceInBytes >= 20000000;
     }
 
     public long getStorageAviable(){
-        File testFile = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
-        StatFs statFs = new StatFs(testFile.getPath());
-        long blockSize = statFs.getBlockSize();
-        long avaibleBlocks = statFs.getAvailableBlocks();
-        return avaibleBlocks * blockSize;
+        StatFs statFs = new StatFs(Environment.getRootDirectory().getAbsolutePath());
+        long blockSize = statFs.getBlockSizeLong();
+        long availableBlocks = statFs.getAvailableBlocksLong();
+        return availableBlocks * blockSize;
+    }
+
+    public void saveSpendingsToFile(View view){
+        saveMySpendings();
+    }
+    public void changePercentage(View view){
+        getPercentage();
+    }
+    public void showCreditsView(){
+        startActivity(new Intent(this, licenses.class));
     }
 
 

@@ -1,10 +1,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
-        >
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity">
 
 
     <TextView
@@ -16,7 +19,7 @@
         android:layout_marginTop="136dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="@dimen/welcomeText"/>
+        android:textSize="@dimen/welcomeText" />
 
     <EditText
         android:layout_width="match_parent"
@@ -26,20 +29,67 @@
         android:id="@+id/editText"
         android:layout_marginBottom="129dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true" />
 
-    <ImageButton
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/FABMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton"
+        fab:menu_colorNormal="@color/primary"
+        fab:menu_colorPressed="@color/primaryDark"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/ic_check_black_24dp"
-        android:tint="@android:color/white"
-        android:background="@drawable/ripple_oval"
-        android:stateListAnimator="@anim/animation"
-        android:elevation="@dimen/elavation"
-        android:onClick="calc"/>
+        android:layout_alignParentEnd="true">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/actionbutton"
+            android:layout_gravity="bottom|end"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_check_24dp"
+            fab:fab_colorNormal="@color/accent"
+            fab:fab_colorPressed="@color/accentDark"
+            fab:fab_colorRipple="@color/accentDark"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:onClick="calc"/>
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/saveFAB"
+            android:layout_gravity="bottom|end"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_paperclip"
+            fab:fab_colorNormal="@color/accent"
+            fab:fab_colorPressed="@color/accentDark"
+            fab:fab_colorRipple="@color/accentDark"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:onClick="saveSpendingsToFile"/>
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/changePercentageFAB"
+            android:layout_gravity="bottom|end"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_more_black_24dp"
+            fab:fab_colorNormal="@color/accent"
+            fab:fab_colorPressed="@color/accentDark"
+            fab:fab_colorRipple="@color/accentDark"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:onClick="changePercentage"/>
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+
+
+
+
+
 
 
 </RelativeLayout>

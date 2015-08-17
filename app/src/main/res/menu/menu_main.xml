@@ -3,22 +3,13 @@
 
     <item android:id="@+id/mainActivitySettings"
         android:title="@string/action_settings"
-        android:orderInCategory="3"
+        android:orderInCategory="2"
         android:showAsAction="never" />
     <item
-        android:icon="@drawable/ic_more_black_24dp"
-        android:title="@string/percentagePositiveButtonPrompt"
-        android:showAsAction="ifRoom"
-        android:visible="true"
-        android:id="@+id/tipPercentageMenuItem"
         android:orderInCategory="1"
-        />
-    <item
-        android:orderInCategory="2"
-        android:title="@string/saveMySpendings"
-        android:icon="@drawable/ic_attach_file_black_24dp"
-        android:showAsAction="ifRoom"
-        android:id="@+id/spendingsMenuItem"/>
+        android:title="@string/credits"
+        android:showAsAction="never"
+        android:id="@+id/creditsItem" />
 
 
 </menu>
