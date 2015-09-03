@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StatFs;
@@ -12,13 +13,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,9 +29,8 @@ import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements AdapterView.OnItemSelectedListener{
 
     EditText e;
     TextView t;
@@ -41,13 +41,49 @@ public class MainActivity extends Activity {
     double tip;
     double subtotal;
     double total;
+    Spinner serviceQualitySpinner;
+    public static final String preferancesName = "tipsUX_preferances";
+    colorSelector colorSelector = new colorSelector();
+    private static int themeValue = 0;
 
     private List<FloatingActionMenu> menus = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences preferences = getSharedPreferences(preferancesName, MODE_PRIVATE);
+        themeValue = preferences.getInt("theme", 0); //0 is default return
+        if (themeValue == 0){
+            setTheme(R.style.orangeTheme);
+        }
+        else if (themeValue == 1){
+            setTheme(R.style.orangeThemeDark);
+        }
+        else if (themeValue == 2){
+            setTheme(R.style.tealTheme);
+        }
+        else if (themeValue == 3){
+            setTheme(R.style.tealThemeDark);
+        }
+        else if (themeValue == 4){
+            setTheme(R.style.greenTheme);
+        }
+        else if (themeValue == 5){
+            setTheme(R.style.greenThemeDark);
+        }
+        else if (themeValue == 6){
+            setTheme(R.style.redTheme);
+        }
+        else if (themeValue == 7){
+            setTheme(R.style.redThemeDark);
+        }
+        else{
+            Toast.makeText(getApplicationContext(), R.string.themePrefsNotFoundErrorExplaination, Toast.LENGTH_LONG).show();
+            setTheme(R.style.orangeTheme);
+        }
+        setTheme(R.style.orangeTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getApplicationContext().setTheme(R.style.orangeTheme);
         e = (EditText) findViewById(R.id.editText);
         t = (TextView) findViewById(R.id.textView);
 
@@ -55,7 +91,6 @@ public class MainActivity extends Activity {
         menus.add(menu1);
         menu1.setClosedOnTouchOutside(true);
         menu1.setIconAnimated(false);
-
 
     }
 
@@ -81,6 +116,12 @@ public class MainActivity extends Activity {
                 return true;
             case R.id.creditsItem:
                 showCreditsView();
+                return true;
+            case R.id.ActionBarThemeActivity:
+                invokeThemeActivity();
+                return true;
+
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -121,23 +162,20 @@ public class MainActivity extends Activity {
     }
 
     public void getPercentage() {
+        serviceQualitySpinner = new Spinner(this);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.serviceQualities, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        serviceQualitySpinner.setAdapter(adapter);
         final EditText percentage = new EditText(this);
         percentage.setHint("%");
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                .setIcon(R.drawable.ic_attach_money)
-                .setView(percentage)
+                .setTitle(getString(R.string.serviceQualityPrompt))
+                //.setIcon(R.drawable.ic_attach_money)
+                .setView(serviceQualitySpinner)
                 .setPositiveButton(R.string.percentagePositiveButtonPrompt, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        /**
-                         * Get new percentage or fall back to a Toast prompt for the user
-                         */
-                        try {
-                            percent = Integer.valueOf(percentage.getText().toString());
-                        } catch (Exception invalidNumberException) {
-                            invalidNumberException.printStackTrace();
-                            Toast.makeText(getApplicationContext(), R.string.pleaseEnterValidPercent, Toast.LENGTH_SHORT).show();
-                        }
+
                     }
                 })
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -318,6 +356,30 @@ public class MainActivity extends Activity {
     }
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        TextView SelectedItem = (TextView) view;
+        //broken
+        if (parent.getItemAtPosition(position).toString().equals("Excellent")) percent = 30;
+        else if (parent.getItemAtPosition(position).toString().equals("Good")) {}
+        else if (parent.getItemAtPosition(position).toString().equals("Decent")) percent = 15;
+        else if (parent.getItemAtPosition(position).toString().equals("Low")) percent = 10;
+        else if (parent.getItemAtPosition(position).toString().equals("Terriable")) percent = 5;
+        else if (parent.getItemAtPosition(position).toString().equals("Custom")) {/**implement custom selector*/}
+        //END broken
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    public void invokeThemeActivity(){
+        startActivity(new Intent(this, colorSelector.class));
+    }
+    public void implementTax(View view){
+
+    }
 }
 
 

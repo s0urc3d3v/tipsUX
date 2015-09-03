@@ -1,16 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme" parent="android:Theme.Material.Light">
+    <!-- orange theme configuration -->
+    <style name="orangeTheme" parent="android:Theme.Material.Light">
+        <item name="android:colorPrimary">@color/primaryOrange</item>
+        <item name="android:colorPrimaryDark">@color/primaryDarkOrange</item>
+        <item name="android:colorAccent">@color/accentOrange</item>
+    </style>
 
+    <!-- orange dark theme configuration -->
+    <style name="orangeThemeDark" parent="android:Theme.Material">
+        <item name="android:colorPrimary">@color/primaryOrange</item>
+        <item name="android:colorPrimaryDark">@color/primaryDarkOrange</item>
+        <item name="android:colorAccent">@color/accentOrange</item>
+    </style>
 
+    <!-- teal theme configuration -->
+    <style name="tealTheme" parent="android:Theme.Material.Light">
+        <item name="android:colorPrimary">@color/primaryTeal</item>
+        <item name="android:colorPrimaryDark">@color/primaryDarkTeal</item>
+        <item name="android:colorAccent">@color/accentTeal</item>
+    </style>
 
+    <!-- teal dark theme configuration -->
+    <style name="tealThemeDark" parent="android:Theme.Material">
+        <item name="android:colorPrimary">@color/primaryTeal</item>
+        <item name="android:colorPrimaryDark">@color/primaryDarkTeal</item>
+        <item name="android:colorAccent">@color/accentTeal</item>
+    </style>
 
+    <!-- green theme configuration -->
+    <style name="greenTheme" parent="android:Theme.Material.Light">
+        <item name="android:colorPrimary">@color/primaryGreen</item>
+        <item name="android:colorPrimaryDark">@color/primaryDarkGreen</item>
+        <item name="android:colorAccent">@color/accentGreen</item>
+    </style>
 
+    <!-- green dark theme configuration -->
+    <style name="greenThemeDark" parent="android:Theme.Material">
+        <item name="android:colorPrimary">@color/primaryGreen</item>
+        <item name="android:colorPrimaryDark">@color/primaryDarkGreen</item>
+        <item name="android:colorAccent">@color/accentGreen</item>
+    </style>
 
+    <!-- red theme configuration -->
+    <style name="redTheme" parent="android:Theme.Material.Light">
+        <item name="android:colorPrimary">@color/primaryRed</item>
+        <item name="android:colorPrimaryDark">@color/primaryDarkRed</item>
+        <item name="android:colorAccent">@color/accentRed</item>
+    </style>
 
-        <item name="android:colorPrimaryDark">@color/primaryDark</item>
-        <item name="android:colorPrimary">@color/primary</item>
-
-        <item name="android:colorAccent">@color/accent</item>
+    <!-- red dark theme configuration -->
+    <style name="redThemeDark" parent="android:Theme.Material">
+        <item name="android:colorPrimary">@color/primaryRed</item>
+        <item name="android:colorPrimaryDark">@color/primaryDarkRed</item>
+        <item name="android:colorAccent">@color/accentRed</item>
     </style>
 </resources>

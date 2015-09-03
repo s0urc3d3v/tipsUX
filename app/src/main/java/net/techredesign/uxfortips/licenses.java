@@ -14,16 +14,21 @@ public class licenses extends Activity {
     TextView floatingActionButtonLicenseView;
     TextView apacheLicense2View;
     TextView apacheLicense2View2;
+    TextView creativeCommonsLicense;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.orangeTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_licenses);
         floatingActionButtonLicenseView  = (TextView) findViewById(R.id.floatingActionButonLibraryLicenseTextView);
+        floatingActionButtonLicenseView.setMovementMethod(new ScrollingMovementMethod());
         apacheLicense2View = (TextView) findViewById(R.id.apacheLicense2View);
         apacheLicense2View.setMovementMethod(new ScrollingMovementMethod());
         apacheLicense2View2 = (TextView) findViewById(R.id.apacheLicense2View2);
         apacheLicense2View2.setMovementMethod(new ScrollingMovementMethod());
+        creativeCommonsLicense = (TextView) findViewById(R.id.creativeCommonsViewElement);
+        creativeCommonsLicense.setMovementMethod(new ScrollingMovementMethod());
     }
 
     @Override

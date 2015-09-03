@@ -1,8 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#FF5722</color>
-    <color name="primaryDark">#E64A19</color>
-    <color name="accent">#3F51B5</color>
-    <color name="accentDark">#303F9F</color>
-    <color name="background">#E91E63</color>
+    <!--Orange theme colors -->
+    <color name="primaryOrange">#FF5722</color>
+    <color name="primaryDarkOrange">#E64A19</color>
+    <!-- Accent purple color -->
+    <color name="accentOrange">#3F51B5</color>
+    <color name="accentDarkOrange">#303F9F</color>
+    <color name="backgroundOrange">#E91E63</color>
+
+    <!--Teal theme colors -->
+    <color name="primaryTeal">#009688</color>
+    <color name="primaryDarkTeal">#00796B</color>
+    <!-- Accent pink colors -->
+    <color name="accentTeal">#E91E63</color>
+    <color name="accentDarkTeal">#E91E63</color>
+    <color name="backgroundTeal">#FCE4EC</color>
+
+    <!-- Red theme colors -->
+    <color name="primaryRed">#F44336</color>
+    <color name="primaryDarkRed">#D32F2F</color>
+    <!-- Accent green colors -->
+    <color name="accentRed">#4CAF50</color>
+    <color name="accentDarkRed">#388E3C</color>
+    <color name="backgroundRed">#E8F5E9</color>
+
+    <!-- Green theme colors -->
+    <color name="primaryGreen">#4CAF50</color>
+    <color name="primaryDarkGreen">#388E3C</color>
+    <!-- Accent red color -->
+    <color name="accentGreen">#F44336</color>
+    <color name="accentDarkGreen">#D32F2F</color>
+    <color name="backgroundGreen">#FFEBEE</color>
 </resources>

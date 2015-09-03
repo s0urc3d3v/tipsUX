@@ -1,0 +1,1 @@
+must use setStyle(); (NOT super.setStyle();) in every activity to prevetn the lack of styles referance.

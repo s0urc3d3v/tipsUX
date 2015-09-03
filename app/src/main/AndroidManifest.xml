@@ -11,7 +11,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@android:style/Theme.Dialog" >
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -28,6 +28,10 @@
         <activity
             android:name=".licenses"
             android:label="@string/title_activity_licenses" >
+        </activity>
+        <activity
+            android:name=".colorSelector"
+            android:label="@string/title_activity_color_selector" >
         </activity>
     </application>
 

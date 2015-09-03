@@ -37,20 +37,20 @@
         android:id="@+id/FABMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        fab:menu_colorNormal="@color/primary"
-        fab:menu_colorPressed="@color/primaryDark"
+        fab:menu_colorNormal="@color/primaryOrange"
+        fab:menu_colorPressed="@color/primaryDarkOrange"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true">
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/actionbutton"
+            android:id="@+id/calculateTipFAB"
             android:layout_gravity="bottom|end"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_check_24dp"
-            fab:fab_colorNormal="@color/accent"
-            fab:fab_colorPressed="@color/accentDark"
-            fab:fab_colorRipple="@color/accentDark"
+            fab:fab_colorNormal="@color/accentOrange"
+            fab:fab_colorPressed="@color/accentDarkOrange"
+            fab:fab_colorRipple="@color/accentDarkOrange"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
@@ -62,26 +62,41 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_paperclip"
-            fab:fab_colorNormal="@color/accent"
-            fab:fab_colorPressed="@color/accentDark"
-            fab:fab_colorRipple="@color/accentDark"
+            fab:fab_colorNormal="@color/accentOrange"
+            fab:fab_colorPressed="@color/accentDarkOrange"
+            fab:fab_colorRipple="@color/accentDarkOrange"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:onClick="saveSpendingsToFile"/>
+
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/changePercentageFAB"
             android:layout_gravity="bottom|end"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_more_black_24dp"
-            fab:fab_colorNormal="@color/accent"
-            fab:fab_colorPressed="@color/accentDark"
-            fab:fab_colorRipple="@color/accentDark"
+            fab:fab_colorNormal="@color/accentOrange"
+            fab:fab_colorPressed="@color/accentDarkOrange"
+            fab:fab_colorRipple="@color/accentDarkOrange"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:onClick="changePercentage"/>
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/includeTaxFAB"
+            android:layout_gravity="bottom|end"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_check_24dp"
+            fab:fab_colorNormal="@color/accentOrange"
+            fab:fab_colorPressed="@color/accentDarkOrange"
+            fab:fab_colorRipple="@color/accentDarkOrange"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:onClick="implementTax"/>
 
     </com.github.clans.fab.FloatingActionMenu>
 

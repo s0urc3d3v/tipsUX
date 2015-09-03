@@ -9,6 +9,7 @@ public class settings extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.orangeTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
     }
