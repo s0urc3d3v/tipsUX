@@ -219,5 +219,5 @@ Apache License
    See the License for the specific language governing permissions and
    limitations under the License.
 
-I used icons from Google licensed under the [CC-BY license](https://creativecommons.org/licenses/by/4.0/): [license here](https://creativecommons.org/licenses/by/4.0/legalcode)
+I used icons from Google licensed under the [CC-BY license](https://creativecommons.org/licenses/by/4.0/): [license here](https://creativecommons.org/licenses/by/4.0/legalcode).  [Found here](https://www.google.com/design/icons/)
 
