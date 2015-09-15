@@ -8,8 +8,8 @@ android {
         applicationId "net.techredesign.uxfortipsNEW"
         minSdkVersion 18
         targetSdkVersion 22
-        versionCode 8
-        versionName "3.1"
+        versionCode 10
+        versionName "3.3"
     }
     buildTypes {
         release {

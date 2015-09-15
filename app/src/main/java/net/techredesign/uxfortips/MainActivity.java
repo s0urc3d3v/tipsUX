@@ -30,63 +30,67 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity implements AdapterView.OnItemSelectedListener{
+public class MainActivity extends Activity {
 
-    EditText e;
-    TextView t;
+    EditText subtotalInputFeildET;
+    String myPreferences = "net.techredesign.uxForTips";
+    SharedPreferences sharedPreferences;
+    TextView totalAndPromptView;
+    TextView UITipView;
     AlertDialog dialog;
     AlertDialog pathDialog;
     int percent = 20;
     String path = "";
-    double tip;
-    double subtotal;
-    double total;
+    private double tip = 0;
+    private double subtotal = 0;
+    private double total = 0;
     Spinner serviceQualitySpinner;
-    public static final String preferancesName = "tipsUX_preferances";
     colorSelector colorSelector = new colorSelector();
     private static int themeValue = 0;
+    static long localTaxPercent = 0;
+    static long localTax;
 
     private List<FloatingActionMenu> menus = new ArrayList<>();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SharedPreferences preferences = getSharedPreferences(preferancesName, MODE_PRIVATE);
-        themeValue = preferences.getInt("theme", 0); //0 is default return
-        if (themeValue == 0){
+        sharedPreferences = getSharedPreferences(myPreferences, Context.MODE_PRIVATE);
+        int theme = sharedPreferences.getInt("theme", 0);
+        if (theme == 1){
             setTheme(R.style.orangeTheme);
         }
-        else if (themeValue == 1){
+        else if (theme == 2){
             setTheme(R.style.orangeThemeDark);
         }
-        else if (themeValue == 2){
+        else if (theme == 3){
             setTheme(R.style.tealTheme);
+
         }
-        else if (themeValue == 3){
+        else if (theme == 4){
             setTheme(R.style.tealThemeDark);
         }
-        else if (themeValue == 4){
+        else if (theme == 5){
             setTheme(R.style.greenTheme);
         }
-        else if (themeValue == 5){
+        else if (theme == 6){
             setTheme(R.style.greenThemeDark);
         }
-        else if (themeValue == 6){
+        else if (theme == 7){
             setTheme(R.style.redTheme);
         }
-        else if (themeValue == 7){
+        else if (theme == 8){
             setTheme(R.style.redThemeDark);
         }
         else{
-            Toast.makeText(getApplicationContext(), R.string.themePrefsNotFoundErrorExplaination, Toast.LENGTH_LONG).show();
             setTheme(R.style.orangeTheme);
         }
-        setTheme(R.style.orangeTheme);
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getApplicationContext().setTheme(R.style.orangeTheme);
-        e = (EditText) findViewById(R.id.editText);
-        t = (TextView) findViewById(R.id.textView);
-
+        super.onCreate(savedInstanceState);
+        subtotalInputFeildET = (EditText) findViewById(R.id.subTotalInputFieldET);
+        UITipView = (TextView) findViewById(R.id.tipViewUIwidgetTV);
+        totalAndPromptView = (TextView) findViewById(R.id.PromptAndTotalTV);
         FloatingActionMenu menu1 = (FloatingActionMenu) findViewById(R.id.FABMenu);
         menus.add(menu1);
         menu1.setClosedOnTouchOutside(true);
@@ -128,50 +132,25 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
     }
 
     public void calc(View view) {
-        subtotal = 0;
-        tip = calculateTip();
-        if (tip != -1) {
-            try {
-                subtotal = Double.valueOf(e.getText().toString());
-            } catch (Exception conversionError) {
-                conversionError.printStackTrace();
-                Toast.makeText(getApplicationContext(), R.string.invalidSubtotalWarning, Toast.LENGTH_LONG).show();
-            }
-            setValues(tip, calculateTotal(subtotal, tip));
-        } else {
-            Log.w("input invalid", "NOT A NUMBER [INT]");
-
-        }
-    }
-
-
-    public double calculateTip() {  //will return -1 if try failed
-        try {
-            final Double subtotal = Double.valueOf(e.getText().toString());
-            return subtotal * (percent * 0.01);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(), R.string.invalidStringWarning, Toast.LENGTH_SHORT).show();
-            return -1;
-        }
-
-    }
-
-    public double calculateTotal(double subtotal, double tip) {
-        return subtotal + tip;
+        double userSubtotal = getUserSubtotalInput();
+        //Log.w("USER SUBTOTAL: ", String.valueOf(userSubtotal));
+        double tip = getTip(userSubtotal);
+        //Log.w("TIP: ", String.valueOf(tip));
+        double tax = getTax(userSubtotal);
+        double total = getTotal(userSubtotal, tip, tax);
+        //Log.w("TOTAL: ", String.valueOf(total));
+        setTotalOnUI(total);
+        setTipOnUI(tip);
+        //Log.w("Tax", String.valueOf(tax));
     }
 
     public void getPercentage() {
-        serviceQualitySpinner = new Spinner(this);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.serviceQualities, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        serviceQualitySpinner.setAdapter(adapter);
-        final EditText percentage = new EditText(this);
-        percentage.setHint("%");
+        final EditText percentageInput = new EditText(this);
+        percentageInput.setHint("%");
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.serviceQualityPrompt))
-                //.setIcon(R.drawable.ic_attach_money)
-                .setView(serviceQualitySpinner)
+                        //.setIcon(R.drawable.ic_attach_money)
+                .setView(percentageInput)
                 .setPositiveButton(R.string.percentagePositiveButtonPrompt, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -190,11 +169,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
 
     public void dismissView() { //workaround :(
         dialog.dismiss();
-    }
-
-    public void setValues(double tip, double total) {
-        DecimalFormat decimalFormatter = new DecimalFormat("#.00");
-        t.setText(getString(R.string.tipView) + decimalFormatter.format(tip) + "\n" + getString(R.string.totalView) + decimalFormatter.format(total));
     }
 
     public void openSettings() {
@@ -226,7 +200,8 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
                                 }
                             }
                         } else {
-                            Toast.makeText(getApplicationContext(), R.string.noSubtotalError, Toast.LENGTH_SHORT).show();;
+                            Toast.makeText(getApplicationContext(), R.string.noSubtotalError, Toast.LENGTH_SHORT).show();
+                            ;
                         }
 
 
@@ -235,55 +210,49 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dismissPathAlertDialogView();
+                        dismissView();
                     }
                 });
         pathDialog = alertBuilder.create();
         pathDialog.show();
     }
 
-    public void dismissPathAlertDialogView() {
-        pathDialog.dismiss();
-    }
-
     public void setTipSubtotalAndTotal() {
         try {
-            subtotal = Double.valueOf(e.getText().toString());
+            subtotal = Double.valueOf(subtotalInputFeildET.getText().toString());
         } catch (Exception exception) {
             exception.printStackTrace();
         }
         tip = subtotal * 0.2;
         total = subtotal + tip;
-
-
     }
-    public void writeTipAndTotal(){ //There is a check in the alertDialog so additional checks are not necessary
+
+    public void writeTipAndTotal() { //There is a check in the alertDialog so additional checks are not necessary
         String filename = getString(R.string.filename);
         String newLine = "\n";
         FileOutputStream output;
         File f = new File("/storage/emulated/Documents/spendings.txt");
-        if (f.exists()){
-                try {
-                    PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("/storage/emulated/0/Documents/spendings.txt", true)));
-                    writer.println(newLine);
-                    writer.println(getString(R.string.tipPromptForFile));
-                    writer.println(getString(R.string.tab));
-                    writer.println(String.valueOf(tip));
-                    writer.println(newLine);
-                    writer.println(getString(R.string.totalPromptForFile));
-                    writer.println(R.string.tab);
-                    writer.println(String.valueOf(subtotal));
-                    writer.println(newLine);
-                    writer.println(getString(R.string.lineFormatting));
-                    writer.close();
+        if (f.exists()) {
+            try {
+                PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("/storage/emulated/0/Documents/spendings.txt", true)));
+                writer.println(newLine);
+                writer.println(getString(R.string.tipPromptForFile));
+                writer.println(getString(R.string.tab));
+                writer.println(String.valueOf(tip));
+                writer.println(newLine);
+                writer.println(getString(R.string.totalPromptForFile));
+                writer.println(R.string.tab);
+                writer.println(String.valueOf(subtotal));
+                writer.println(newLine);
+                writer.println(getString(R.string.lineFormatting));
+                writer.close();
 
-                } catch (IOException IOExceptionCreatingWriter) {
-                    IOExceptionCreatingWriter.printStackTrace();
-                }
+            } catch (IOException IOExceptionCreatingWriter) {
+                IOExceptionCreatingWriter.printStackTrace();
+            }
 
 
-        }
-        else {
+        } else {
             try {
                 output = openFileOutput(filename, Context.MODE_WORLD_WRITEABLE);
                 output.write(getString(R.string.spendingHeader).getBytes());
@@ -303,27 +272,27 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         }
 
 
-
-
     }
-    public boolean isExternalStorageWritable(){
+
+    public boolean isExternalStorageWritable() {
         String stateOfExteneralWriteEnviorment = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(stateOfExteneralWriteEnviorment)){
-            return true;
-        }
-        return false;
-    }
-    public boolean isExternalStorageReadable(){
-        String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state) || Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)){
+        if (Environment.MEDIA_MOUNTED.equals(stateOfExteneralWriteEnviorment)) {
             return true;
         }
         return false;
     }
 
-    public File getSaveDirectory(String dirName){
+    public boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state) || Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    public File getSaveDirectory(String dirName) {
         File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), dirName);
-        if (!f.mkdirs()){
+        if (!f.mkdirs()) {
             Toast.makeText(getApplicationContext(), R.string.errorGettingDirectory, Toast.LENGTH_SHORT).show();
         }
         return f;
@@ -338,47 +307,142 @@ public class MainActivity extends Activity implements AdapterView.OnItemSelected
         return freeSpaceInBytes >= 20000000;
     }
 
-    public long getStorageAviable(){
+    public long getStorageAviable() {
         StatFs statFs = new StatFs(Environment.getRootDirectory().getAbsolutePath());
         long blockSize = statFs.getBlockSizeLong();
         long availableBlocks = statFs.getAvailableBlocksLong();
         return availableBlocks * blockSize;
     }
 
-    public void saveSpendingsToFile(View view){
+    public void saveSpendingsToFile(View view) {
         saveMySpendings();
     }
-    public void changePercentage(View view){
+
+    public void changePercentage(View view) {
         getPercentage();
     }
-    public void showCreditsView(){
+
+    public void showCreditsView() {
         startActivity(new Intent(this, licenses.class));
     }
 
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        TextView SelectedItem = (TextView) view;
-        //broken
-        if (parent.getItemAtPosition(position).toString().equals("Excellent")) percent = 30;
-        else if (parent.getItemAtPosition(position).toString().equals("Good")) {}
-        else if (parent.getItemAtPosition(position).toString().equals("Decent")) percent = 15;
-        else if (parent.getItemAtPosition(position).toString().equals("Low")) percent = 10;
-        else if (parent.getItemAtPosition(position).toString().equals("Terriable")) percent = 5;
-        else if (parent.getItemAtPosition(position).toString().equals("Custom")) {/**implement custom selector*/}
-        //END broken
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    public void invokeThemeActivity(){
+    public void invokeThemeActivity() {
         startActivity(new Intent(this, colorSelector.class));
     }
-    public void implementTax(View view){
 
+    //computational methods
+    public double getTip(double subtotal){ //BROKEN
+        int tipAsWholeNum = sharedPreferences.getInt("tip", 20);
+        return subtotal * (tipAsWholeNum * 0.01);
+    }
+    public double getTotal(double sTotal, double tip, double tax){
+        Log.w("subtotal: ", String.valueOf(sTotal));
+        Log.w("tip: ", String.valueOf(tip));
+        Log.w("Tax: ", String.valueOf(tax));
+        return sTotal + tip + tax;
+    }
+    public double getTax(double total){ //treat 0 as an exception
+        int localTaxAsWholeNum = sharedPreferences.getInt("tax", 0);
+        if (localTaxAsWholeNum != 0){
+            return (total * (localTaxAsWholeNum * 0.01));
+        }
+        else {
+            getTaxFromUserWithDialog();
+        }
+        return 0;
+    }
+    //end computational methods
+    
+    //parse methods
+    public double getUserSubtotalInput(){
+        double userSubtotal = 0;
+        try {
+            userSubtotal = Double.valueOf(subtotalInputFeildET.getText().toString());
+        }
+        catch (Exception cantParseFloat){
+            Toast.makeText(getApplicationContext(), R.string.invalidSubtotalWarning, Toast.LENGTH_SHORT).show();
+            cantParseFloat.printStackTrace();
+        }
+        if (userSubtotal != 0){
+            return userSubtotal;
+        }
+        else{
+            return 0;
+        }
+    }
+    //end parse method
+    
+    //apply to GUI methods
+    public void setTotalOnUI(double total){
+        String totalAsString = "";
+        try{
+            totalAsString = String.valueOf(total);
+        }
+        catch (Exception stringConversionFailed){
+            Toast.makeText(getApplicationContext(), R.string.genericError, Toast.LENGTH_SHORT).show();
+            stringConversionFailed.printStackTrace();
+        }
+        String concatenatedStringWithTotalForUI = "Total: $" + totalAsString;
+        totalAndPromptView.setText(concatenatedStringWithTotalForUI);
+
+    }
+    public void setTipOnUI(double tip){
+        String tipAsString = "";
+        try{
+            tipAsString = String.valueOf(tip);
+        }
+        catch (Exception failedStringConversion){
+            Toast.makeText(getApplicationContext(), R.string.genericError, Toast.LENGTH_SHORT).show();
+            failedStringConversion.printStackTrace();
+        }
+        String concatenatedStringWithTipForUI = "Tip: $" + tipAsString;
+        UITipView.setText(concatenatedStringWithTipForUI);
+    }
+    //end apply to GUI methods
+
+    //get Tax is not already available
+    public void getTaxFromUserWithDialog() {
+        final EditText taxInputFieldForAlertDialog = new EditText(this);
+        taxInputFieldForAlertDialog.setHint("%");
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this)
+                .setTitle("Please enter your local tax")
+                .setIcon(R.drawable.ic_attach_money)
+                .setView(taxInputFieldForAlertDialog)
+                .setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String userTaxInputViaAlert = taxInputFieldForAlertDialog.getText().toString();
+                        int userTaxInputViaAlertAsDouble = 0;
+                        try {
+                            userTaxInputViaAlertAsDouble = Integer.valueOf(userTaxInputViaAlert);
+                        }
+                        catch (Exception failedToParseUserTaxViaAlertToFloat){
+                            Toast.makeText(getApplicationContext(), R.string.invalidNumer, Toast.LENGTH_SHORT).show();
+                            failedToParseUserTaxViaAlertToFloat.printStackTrace();
+                            return;
+                        }
+
+                        if (userTaxInputViaAlertAsDouble != 0 && userTaxInputViaAlertAsDouble <= 100){
+                            SharedPreferences.Editor preferencesEditor = sharedPreferences.edit();
+                            preferencesEditor.putInt("tax", userTaxInputViaAlertAsDouble);
+                            preferencesEditor.apply();
+                            return;
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), R.string.invalidTax, Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                    }
+                })
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dismissView();
+                    }
+                });
+        AlertDialog getTaxAsDialog = alertBuilder.create();
+        getTaxAsDialog.show();
     }
 }
 

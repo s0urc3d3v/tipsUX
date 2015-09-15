@@ -44,14 +44,17 @@
         android:background="@color/primaryGreen"
         android:onClick="green"/>
 
-    <Switch
-        android:layout_width="match_parent"
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/darkThemeSwitch"
-        android:id="@+id/darkThemeToggle"
+        android:text="@string/darkThemeBtn"
+        android:id="@+id/toggleDarkThemeBtn"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:checked="false" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:background="@color/black"
+        android:textColor="@color/white"
+        android:onClick="toggleDarkTheme"/>
 
 
 </RelativeLayout>

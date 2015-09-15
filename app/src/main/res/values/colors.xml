@@ -31,4 +31,10 @@
     <color name="accentGreen">#F44336</color>
     <color name="accentDarkGreen">#D32F2F</color>
     <color name="backgroundGreen">#FFEBEE</color>
+
+    <!-- white and black -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+
 </resources>

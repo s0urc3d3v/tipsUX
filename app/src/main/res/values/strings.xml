@@ -7,7 +7,7 @@
     <string name="total">Total</string>
     <string name="cancel">Cancel</string>
     <string name="pleaseEnterValidPercent">Please enter a valid percentage</string>
-    <string name="invalidStringWarning">That is not a number :)</string>
+    <string name="invalidNumer">That is not a valid numer :)</string>
     <string name="invalidSubtotalWarning">Invalid subtotal</string>
     <string name="tipView">Tip: $</string>
     <string name="totalView">Total: $</string>
@@ -49,6 +49,17 @@ e your spendings</string>
     <string name="comingSoon">Coming Soon!</string>
     <string name="creativeCommonsLicense">I used icons from Google licensed under the creative commons CC-BY (Creative Commons attribution license: https://creativecommons.org/licenses/by/4.0/.  License here:  https://creativecommons.org/licenses/by/4.0/legalcode</string>
     <string name="title_activity_about">about</string>
+    <string name="localTaxPrompt">Local Tax</string>
+    <string name="save">Save</string>
+    <string name="failedToParseTax">Failed to parse tax</string>
+    <string name="genericError">Sorry, an error has occured</string>
+    <string name="empty" />
+    <string name="UItotalPrompt">Total: $</string>
+    <string name="UITipPrompt">Tip: $</string>
+    <string name="invalidTax">Invalid tax</string>
+    <string name="preferedTip">Defualt tip</string>
+    <string name="faildToParseInt">Sorry, parsing failed</string>
+    <string name="darkThemeBtn">Dark Theme</string>
 </resources>
 
 
