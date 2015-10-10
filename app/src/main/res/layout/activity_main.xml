@@ -55,16 +55,6 @@
             android:layout_alignParentEnd="true"
             android:onClick="calc"/>
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/saveFAB"
-            android:layout_gravity="bottom|end"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_paperclip"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:onClick="saveSpendingsToFile"/>
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/changePercentageFAB"
