@@ -5,4 +5,5 @@
     <dimen name="elavation">3dp</dimen>
     <dimen name="welcomeText">40dp</dimen>
     <dimen name="switchSize">16dp</dimen>
+    <dimen name="NoticeOfLicensesTextSize">25sp</dimen>
 </resources>

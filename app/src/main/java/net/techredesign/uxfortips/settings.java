@@ -8,19 +8,25 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.nispok.snackbar.Snackbar;
+import com.nispok.snackbar.SnackbarManager;
+import com.nispok.snackbar.listeners.ActionClickListener;
 
 public class settings extends Activity {
     EditText localTax;
     EditText defaultTipET;
     SharedPreferences sharedPreferences;
     private static final String PreferancesName = "net.techredesign.uxForTips";
+    int tempValue = 0;
+    static int theme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.orangeTheme);
+        sharedPreferences = getSharedPreferences(PreferancesName, MODE_PRIVATE);
+        setTheme(appResources.getUserTheme(sharedPreferences.getInt("theme", 0)));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         localTax = (EditText) findViewById(R.id.taxInput);
@@ -53,7 +59,6 @@ public class settings extends Activity {
     public void setTax(View view){
         int tax = 0;
         try {
-            Log.w("TaxFeild: ", String.valueOf(localTax));
             tax = Integer.valueOf(localTax.getText().toString());
         }
         catch (Exception e){
@@ -61,22 +66,62 @@ public class settings extends Activity {
             e.printStackTrace();
             return;
         }
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        tempValue = 0;
+        if (sharedPreferences.getInt("tax", 0)!= 0){
+            tempValue = sharedPreferences.getInt("tax", 0);
+        }
         editor.putInt("tax", tax);
         editor.apply();
+        SnackbarManager.show(
+                Snackbar.with(getApplicationContext())
+                        .text(getString(R.string.taxSet))
+                        .actionLabel(getString(R.string.undoTax))
+                        .colorResource(R.color.accentOrange) //TODO implement theming
+                        .actionColor(getResources().getColor(R.color.primaryOrange)) //TODO implement theming
+                        .actionListener(new ActionClickListener() {
+                            @Override
+                            public void onActionClicked(Snackbar snackbar) {
+                                editor.putInt("tax", tempValue);
+                                editor.apply();
+
+                            }
+                        }), this
+        );
     }
-    public void setDefaultTip(View view){
+    public void setDefaultTip(View view) {
         int tip = 0;
-        try{
+        try {
             Log.w("output", String.valueOf(defaultTipET.getText().toString()));
             tip = Integer.valueOf(defaultTipET.getText().toString());
-        }
-        catch (Exception couldNotParseInteger){
+        } catch (Exception couldNotParseInteger) {
             Toast.makeText(getApplicationContext(), R.string.faildToParseInt, Toast.LENGTH_SHORT).show();
             couldNotParseInteger.printStackTrace();
         }
-        SharedPreferences.Editor editor = sharedPreferences.edit();
+        tempValue = 0;
+        if (sharedPreferences.getInt("tip", 0) != 0) {
+            tempValue = sharedPreferences.getInt("tip", 0);
+        }
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("tip", tip);
         editor.apply();
+        SnackbarManager.show(
+                Snackbar.with(getApplicationContext())
+                        .text(getString(R.string.taxSet))
+                        .actionLabel(getString(R.string.undoTax))
+                        .colorResource(R.color.accentOrange) //TODO implement theming
+                        .actionColor(getResources().getColor(R.color.accentOrange)) //TODO implement theming
+                        .actionListener(new ActionClickListener() {
+                            @Override
+                            public void onActionClicked(Snackbar snackbar) {
+                                editor.putInt("tip", tempValue);
+                                editor.apply();
+
+                            }
+                        }), this
+        );
     }
-}
+
+
+    }
+

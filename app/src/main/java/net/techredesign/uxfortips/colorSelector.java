@@ -4,14 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.Toast;
-import android.widget.ToggleButton;
+
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 
 public class colorSelector extends Activity {
     private static final String preferencesName = "net.techredesign.uxForTips";
@@ -66,6 +65,24 @@ public class colorSelector extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_selector);
 
+        // Get Fabs from XML
+        FloatingActionButton FABS[]= {((FloatingActionButton) findViewById(R.id.orangeFAB)), ((FloatingActionButton) findViewById(R.id.redFAB)), ((FloatingActionButton) findViewById(R.id.greenFAB)), ((FloatingActionButton) findViewById(R.id.tealFAB))};
+        int[] pararallelColorArray = {getResources().getColor(R.color.primaryOrange), getResources().getColor(R.color.primaryRed), getResources().getColor(R.color.primaryGreen), getResources().getColor(R.color.primaryTeal)};
+        FloatingActionButton darkThemeToggle = (FloatingActionButton) findViewById(R.id.DarkThemeFAB);
+        String[] colorNames = getResources().getStringArray(R.array.Colors).clone();
+        int i = 0;
+
+        for (FloatingActionButton f : FABS){
+            f.setColorNormal(pararallelColorArray[i]);
+            f.setLabelText(colorNames[i]);
+            i++;
+        }
+        darkThemeToggle.setColorNormal(getResources().getColor(R.color.black));
+        darkThemeToggle.setLabelText(getResources().getString(R.string.toggleDarkThem));
+        FloatingActionMenu menu = (FloatingActionMenu) findViewById(R.id.colorSelectorMenu);
+        menu.setAnimated(true);
+
+
 
     }
 
@@ -90,6 +107,12 @@ public class colorSelector extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    /**
+     *
+     * @param view
+     *Replace with a FAB menu
+     * */
     public void orange(View view){
         if (sharedPreferences.getBoolean("dark", false)){
             preferenceEditor.putInt("theme", 2);

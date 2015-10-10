@@ -2,30 +2,22 @@ package net.techredesign.uxfortips;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.StatFs;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
+import android.widget.EditText;Adde
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,45 +48,58 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        sharedPreferences = getSharedPreferences(myPreferences, Context.MODE_PRIVATE);
-        int theme = sharedPreferences.getInt("theme", 0);
-        if (theme == 1){
-            setTheme(R.style.orangeTheme);
-        }
-        else if (theme == 2){
-            setTheme(R.style.orangeThemeDark);
-        }
-        else if (theme == 3){
-            setTheme(R.style.tealTheme);
-
-        }
-        else if (theme == 4){
-            setTheme(R.style.tealThemeDark);
-        }
-        else if (theme == 5){
-            setTheme(R.style.greenTheme);
-        }
-        else if (theme == 6){
-            setTheme(R.style.greenThemeDark);
-        }
-        else if (theme == 7){
-            setTheme(R.style.redTheme);
-        }
-        else if (theme == 8){
-            setTheme(R.style.redThemeDark);
-        }
-        else{
-            setTheme(R.style.orangeTheme);
-        }
+        sharedPreferences = getSharedPreferences(getString(R.string.packageName), MODE_PRIVATE);
+        setTheme(appResources.getUserTheme(sharedPreferences.getInt("theme", 0)));
         setContentView(R.layout.activity_main);
         super.onCreate(savedInstanceState);
         subtotalInputFeildET = (EditText) findViewById(R.id.subTotalInputFieldET);
         UITipView = (TextView) findViewById(R.id.tipViewUIwidgetTV);
         totalAndPromptView = (TextView) findViewById(R.id.PromptAndTotalTV);
         FloatingActionMenu menu1 = (FloatingActionMenu) findViewById(R.id.FABMenu);
+        FloatingActionButton saveFAB = (FloatingActionButton) findViewById(R.id.saveFAB);
+        FloatingActionButton changePercentageFAB = (FloatingActionButton) findViewById(R.id.changePercentageFAB);
+        FloatingActionButton calculateTipFAB = (FloatingActionButton) findViewById(R.id.calculateTipFAB);
+        FloatingActionButton[] fabs = {saveFAB, changePercentageFAB, calculateTipFAB};
+        int theme = sharedPreferences.getInt("theme", 0);
+        for ( FloatingActionButton f : fabs){
+            if (theme == 1){ //TODO implement Unified Fab Theming
+                f.setColorNormal(getResources().getColor(R.color.accentOrange));
+                f.setColorPressed(getResources().getColor(R.color.accentDarkOrange));
+                menu1.setMenuButtonColorNormal(getResources().getColor(R.color.accentOrange));
+                menu1.setMenuButtonColorPressed(getResources().getColor(R.color.accentDarkOrange));
+            }
+
+            else if (theme == 3){
+                f.setColorNormal(getResources().getColor(R.color.accentTeal));
+                f.setColorPressed(getResources().getColor(R.color.accentDarkTeal));
+                menu1.setMenuButtonColorNormal(getResources().getColor(R.color.accentTeal));
+                menu1.setMenuButtonColorPressed(getResources().getColor(R.color.accentDarkTeal));
+            }
+
+            else if (theme == 5){
+                f.setColorNormal(getResources().getColor(R.color.accentGreen));
+                f.setColorPressed(getResources().getColor(R.color.accentDarkGreen));
+                menu1.setMenuButtonColorNormal(getResources().getColor(R.color.accentGreen));
+                menu1.setMenuButtonColorPressed(getResources().getColor(R.color.accentDarkGreen));
+            }
+
+            else if (theme == 7){
+                f.setColorNormal(getResources().getColor(R.color.accentRed));
+                f.setColorPressed(getResources().getColor(R.color.accentDarkRed));
+                menu1.setMenuButtonColorNormal(getResources().getColor(R.color.accentRed));
+                menu1.setMenuButtonColorPressed(getResources().getColor(R.color.accentDarkRed));
+            }
+
+            else {
+                f.setColorNormal(getResources().getColor(R.color.accentOrange));
+                f.setColorPressed(getResources().getColor(R.color.accentDarkOrange));
+                menu1.setMenuButtonColorNormal(getResources().getColor(R.color.accentOrange));
+                menu1.setMenuButtonColorPressed(getResources().getColor(R.color.accentDarkOrange));
+            }
+        }
         menus.add(menu1);
         menu1.setClosedOnTouchOutside(true);
-        menu1.setIconAnimated(false);
+        menu1.setIconAnimated(true);
 
     }
 
@@ -118,14 +123,12 @@ public class MainActivity extends Activity {
             case R.id.mainActivitySettings:
                 openSettings();
                 return true;
-            case R.id.creditsItem:
-                showCreditsView();
-                return true;
             case R.id.ActionBarThemeActivity:
                 invokeThemeActivity();
                 return true;
-
-
+            case R.id.credits:
+                startCreditsActivity();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -175,47 +178,7 @@ public class MainActivity extends Activity {
         startActivity(new Intent(this, settings.class));
     }
 
-    public void saveMySpendings() {
-        final EditText editText = new EditText(this);
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this)
-                .setTitle(R.string.givePathPrompt)
-                .setIcon(R.drawable.ic_attach_file_black_24dp)
-                .setPositiveButton(R.string.saveToFile, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        setTipSubtotalAndTotal();
-                        if (tip != 0 && subtotal != 0 && total != 0) {
-                            path = editText.getText().toString();
-                            if (isExternalStorageWritable()) {
-                                if (shouldWriteBasedOnStorage()) {
-                                    writeTipAndTotal();
-                                    Toast.makeText(getApplicationContext(), R.string.writeFinished, Toast.LENGTH_LONG).show();
-                                }
-                            } else {
-                                if (isExternalStorageReadable()) {
-                                    Toast.makeText(getApplicationContext(), R.string.externalStorageNotWritableError, Toast.LENGTH_LONG).show();
-                                } else {
-                                    Toast.makeText(getApplicationContext(), R.string.externalStorageNotAccessable, Toast.LENGTH_LONG).show();
 
-                                }
-                            }
-                        } else {
-                            Toast.makeText(getApplicationContext(), R.string.noSubtotalError, Toast.LENGTH_SHORT).show();
-                            ;
-                        }
-
-
-                    }
-                })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dismissView();
-                    }
-                });
-        pathDialog = alertBuilder.create();
-        pathDialog.show();
-    }
 
     public void setTipSubtotalAndTotal() {
         try {
@@ -227,104 +190,10 @@ public class MainActivity extends Activity {
         total = subtotal + tip;
     }
 
-    public void writeTipAndTotal() { //There is a check in the alertDialog so additional checks are not necessary
-        String filename = getString(R.string.filename);
-        String newLine = "\n";
-        FileOutputStream output;
-        File f = new File("/storage/emulated/Documents/spendings.txt");
-        if (f.exists()) {
-            try {
-                PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("/storage/emulated/0/Documents/spendings.txt", true)));
-                writer.println(newLine);
-                writer.println(getString(R.string.tipPromptForFile));
-                writer.println(getString(R.string.tab));
-                writer.println(String.valueOf(tip));
-                writer.println(newLine);
-                writer.println(getString(R.string.totalPromptForFile));
-                writer.println(R.string.tab);
-                writer.println(String.valueOf(subtotal));
-                writer.println(newLine);
-                writer.println(getString(R.string.lineFormatting));
-                writer.close();
-
-            } catch (IOException IOExceptionCreatingWriter) {
-                IOExceptionCreatingWriter.printStackTrace();
-            }
-
-
-        } else {
-            try {
-                output = openFileOutput(filename, Context.MODE_WORLD_WRITEABLE);
-                output.write(getString(R.string.spendingHeader).getBytes());
-                output.write(getString(R.string.tipPromptForFile).getBytes());
-                output.write(getString(R.string.tab).getBytes());
-                output.write(String.valueOf(tip).getBytes());
-                output.write(newLine.getBytes());
-                output.write(getString(R.string.tab).getBytes());
-                output.write(newLine.getBytes());
-                output.write(getString(R.string.lineFormatting).getBytes());
-                output.close();
-
-            } catch (IOException IOException) {
-                IOException.printStackTrace();
-                Toast.makeText(getApplicationContext(), R.string.writeError, Toast.LENGTH_LONG).show();
-            }
-        }
-
-
-    }
-
-    public boolean isExternalStorageWritable() {
-        String stateOfExteneralWriteEnviorment = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(stateOfExteneralWriteEnviorment)) {
-            return true;
-        }
-        return false;
-    }
-
-    public boolean isExternalStorageReadable() {
-        String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state) || Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
-            return true;
-        }
-        return false;
-    }
-
-    public File getSaveDirectory(String dirName) {
-        File f = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), dirName);
-        if (!f.mkdirs()) {
-            Toast.makeText(getApplicationContext(), R.string.errorGettingDirectory, Toast.LENGTH_SHORT).show();
-        }
-        return f;
-
-    }
-
-    public boolean shouldWriteBasedOnStorage() {
-        StatFs statFs = new StatFs(Environment.getRootDirectory().getAbsolutePath());
-        long blockSize = statFs.getBlockSizeLong();
-        long availableBlocks = statFs.getAvailableBlocksLong();
-        long freeSpaceInBytes = availableBlocks * blockSize;
-        return freeSpaceInBytes >= 20000000;
-    }
-
-    public long getStorageAviable() {
-        StatFs statFs = new StatFs(Environment.getRootDirectory().getAbsolutePath());
-        long blockSize = statFs.getBlockSizeLong();
-        long availableBlocks = statFs.getAvailableBlocksLong();
-        return availableBlocks * blockSize;
-    }
-
-    public void saveSpendingsToFile(View view) {
-        saveMySpendings();
-    }
-
     public void changePercentage(View view) {
         getPercentage();
     }
 
-    public void showCreditsView() {
-        startActivity(new Intent(this, licenses.class));
-    }
 
     public void invokeThemeActivity() {
         startActivity(new Intent(this, colorSelector.class));
@@ -375,8 +244,9 @@ public class MainActivity extends Activity {
     //apply to GUI methods
     public void setTotalOnUI(double total){
         String totalAsString = "";
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
         try{
-            totalAsString = String.valueOf(total);
+            totalAsString = String.valueOf(decimalFormat.format(total));
         }
         catch (Exception stringConversionFailed){
             Toast.makeText(getApplicationContext(), R.string.genericError, Toast.LENGTH_SHORT).show();
@@ -388,8 +258,9 @@ public class MainActivity extends Activity {
     }
     public void setTipOnUI(double tip){
         String tipAsString = "";
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
         try{
-            tipAsString = String.valueOf(tip);
+            tipAsString = String.valueOf(decimalFormat.format(tip));
         }
         catch (Exception failedStringConversion){
             Toast.makeText(getApplicationContext(), R.string.genericError, Toast.LENGTH_SHORT).show();
@@ -443,6 +314,9 @@ public class MainActivity extends Activity {
                 });
         AlertDialog getTaxAsDialog = alertBuilder.create();
         getTaxAsDialog.show();
+    }
+    public void startCreditsActivity(){
+        startActivity(new Intent(this, credits.class));
     }
 }
 

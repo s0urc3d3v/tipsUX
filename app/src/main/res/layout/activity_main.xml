@@ -38,8 +38,6 @@
         android:id="@+id/FABMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        fab:menu_colorNormal="@color/primaryOrange"
-        fab:menu_colorPressed="@color/primaryDarkOrange"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true">
 
@@ -63,9 +61,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_paperclip"
-            fab:fab_colorNormal="@color/accentOrange"
-            fab:fab_colorPressed="@color/accentDarkOrange"
-            fab:fab_colorRipple="@color/accentDarkOrange"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
