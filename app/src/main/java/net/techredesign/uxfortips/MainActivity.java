@@ -56,10 +56,9 @@ public class MainActivity extends Activity {
         UITipView = (TextView) findViewById(R.id.tipViewUIwidgetTV);
         totalAndPromptView = (TextView) findViewById(R.id.PromptAndTotalTV);
         FloatingActionMenu menu1 = (FloatingActionMenu) findViewById(R.id.FABMenu);
-        FloatingActionButton saveFAB = (FloatingActionButton) findViewById(R.id.saveFAB);
         FloatingActionButton changePercentageFAB = (FloatingActionButton) findViewById(R.id.changePercentageFAB);
         FloatingActionButton calculateTipFAB = (FloatingActionButton) findViewById(R.id.calculateTipFAB);
-        FloatingActionButton[] fabs = {saveFAB, changePercentageFAB, calculateTipFAB};
+        FloatingActionButton[] fabs = {changePercentageFAB, calculateTipFAB};
         int theme = sharedPreferences.getInt("theme", 0);
         for ( FloatingActionButton f : fabs){
             if (theme == 1){ //TODO implement Unified Fab Theming

@@ -32,53 +32,14 @@ public class colorSelector extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPreferences = getSharedPreferences(preferencesName, Context.MODE_PRIVATE);
-        int theme = sharedPreferences.getInt("theme", 0);
-        if (theme == 1){
-            setTheme(R.style.orangeTheme);
-        }
-        else if (theme == 2){
-            setTheme(R.style.orangeThemeDark);
-        }
-        else if (theme == 3){
-            setTheme(R.style.tealTheme);
+        setTheme(appResources.getUserTheme(sharedPreferences.getInt("theme", 0)));
 
-        }
-        else if (theme == 4){
-            setTheme(R.style.tealThemeDark);
-        }
-        else if (theme == 5){
-            setTheme(R.style.greenTheme);
-        }
-        else if (theme == 6){
-            setTheme(R.style.greenThemeDark);
-        }
-        else if (theme == 7){
-            setTheme(R.style.redTheme);
-        }
-        else if (theme == 8){
-            setTheme(R.style.redThemeDark);
-        }
-        else{
-            setTheme(R.style.orangeTheme);
-        }
         preferenceEditor = sharedPreferences.edit();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_color_selector);
 
         // Get Fabs from XML
-        FloatingActionButton FABS[]= {((FloatingActionButton) findViewById(R.id.orangeFAB)), ((FloatingActionButton) findViewById(R.id.redFAB)), ((FloatingActionButton) findViewById(R.id.greenFAB)), ((FloatingActionButton) findViewById(R.id.tealFAB))};
-        int[] pararallelColorArray = {getResources().getColor(R.color.primaryOrange), getResources().getColor(R.color.primaryRed), getResources().getColor(R.color.primaryGreen), getResources().getColor(R.color.primaryTeal)};
-        FloatingActionButton darkThemeToggle = (FloatingActionButton) findViewById(R.id.DarkThemeFAB);
-        String[] colorNames = getResources().getStringArray(R.array.Colors).clone();
-        int i = 0;
-
-        for (FloatingActionButton f : FABS){
-            f.setColorNormal(pararallelColorArray[i]);
-            f.setLabelText(colorNames[i]);
-            i++;
-        }
-        darkThemeToggle.setColorNormal(getResources().getColor(R.color.black));
-        darkThemeToggle.setLabelText(getResources().getString(R.string.toggleDarkThem));
+        //FloatingActionButton FABS[]= {((FloatingActionButton) findViewById(R.id.orangeFAB)), ((FloatingActionButton) findViewById(R.id.redFAB)), ((FloatingActionButton) findViewById(R.id.greenFAB)), ((FloatingActionButton) findViewById(R.id.tealFAB))};
         FloatingActionMenu menu = (FloatingActionMenu) findViewById(R.id.colorSelectorMenu);
         menu.setAnimated(true);
 

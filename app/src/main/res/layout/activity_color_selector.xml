@@ -68,23 +68,38 @@
         <com.github.clans.fab.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/orangeFAB"/>
+            android:id="@+id/orangeFAB"
+            fab:fab_colorNormal="@color/primaryOrange"
+            fab:fab_label="@string/orange"
+            android:onClick="orange"/>
         <com.github.clans.fab.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/redFAB"/>
+            android:id="@+id/redFAB"
+            fab:fab_colorNormal="@color/primaryRed"
+            fab:fab_label="@string/red"
+            android:onClick="red"/>
         <com.github.clans.fab.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tealFAB"/>
+            android:id="@+id/tealFAB"
+            fab:fab_colorNormal="@color/primaryTeal"
+            fab:fab_label="@string/teal"
+            android:onClick="teal"/>
         <com.github.clans.fab.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/greenFAB"/>
+            android:id="@+id/greenFAB"
+            fab:fab_colorNormal="@color/primaryGreen"
+            fab:fab_label="@string/green"
+            android:onClick="green"/>
         <com.github.clans.fab.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/DarkThemeFAB"/>
+            android:id="@+id/DarkThemeFAB"
+            fab:fab_colorNormal="@color/black"
+            fab:fab_label="@string/black"
+            android:onClick="toggleDarkTheme"/>
     </com.github.clans.fab.FloatingActionMenu>
 
 
