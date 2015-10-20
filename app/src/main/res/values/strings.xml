@@ -135,8 +135,13 @@ limitations under the License.
     <string name="green">Green</string>
     <string name="teal">Teal</string>
     <string name="orange">Orange</string>
-    <string name="toggleDarkThem">Toggle Dark Theme</string>
+    <string name="toggleDarkTheme">Toggle Dark Theme</string>
     <string name="black">Black</string>
+    <string name="darkThemeEnabled">Enabled Dark Theme</string>
+    <string name="darkThemeDisabled">Disabled Dark theme</string>
+    <string name="lightTheme">Light Theme</string>
+    <string name="darkTheme">Dark Theme</string>
+    <string name="restartApp">Apply</string>
 
 </resources>
 

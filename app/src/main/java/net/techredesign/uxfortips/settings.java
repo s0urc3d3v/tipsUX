@@ -107,7 +107,7 @@ public class settings extends Activity {
         editor.apply();
         SnackbarManager.show(
                 Snackbar.with(getApplicationContext())
-                        .text(getString(R.string.taxSet))
+                        .text(getString(R.string.tipSet))
                         .actionLabel(getString(R.string.undoTax))
                         .colorResource(R.color.accentOrange) //TODO implement theming
                         .actionColor(getResources().getColor(R.color.accentOrange)) //TODO implement theming

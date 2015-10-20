@@ -3,4 +3,7 @@
     tools:context="net.techredesign.uxfortips.colorSelector">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" android:showAsAction="never" />
+    <item android:id="@+id/applyMenuItem" android:title="@string/restartApp"
+        android:orderInCategory="1" android:showAsAction="always" android:icon="@drawable/ic_refresh_black_24dp"
+        />
 </menu>

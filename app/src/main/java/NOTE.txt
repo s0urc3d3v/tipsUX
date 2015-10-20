@@ -1,1 +1,5 @@
 must use setStyle(); (NOT super.setStyle();) in every activity to prevent the lack of styles referance.
+if null pointer errors check !null on object
+You MUST getActionBar() everytime you want to chnage it not just onCreate();
+For color drawables using the appResoures you must use getResources().getColor(appResources.getPrimaryColor(theme)); otherwise it will parse incorretly
+anytime getResources().getColor(int) is required use it to wrap appResources calls (getResources().getColor(appResources.getPrimaryColor(theme));)

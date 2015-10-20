@@ -48,18 +48,24 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         sharedPreferences = getSharedPreferences(getString(R.string.packageName), MODE_PRIVATE);
+
         setTheme(appResources.getUserTheme(sharedPreferences.getInt("theme", 0)));
         setContentView(R.layout.activity_main);
         super.onCreate(savedInstanceState);
+
         subtotalInputFeildET = (EditText) findViewById(R.id.subTotalInputFieldET);
         UITipView = (TextView) findViewById(R.id.tipViewUIwidgetTV);
         totalAndPromptView = (TextView) findViewById(R.id.PromptAndTotalTV);
+
         FloatingActionMenu menu1 = (FloatingActionMenu) findViewById(R.id.FABMenu);
         FloatingActionButton changePercentageFAB = (FloatingActionButton) findViewById(R.id.changePercentageFAB);
         FloatingActionButton calculateTipFAB = (FloatingActionButton) findViewById(R.id.calculateTipFAB);
         FloatingActionButton[] fabs = {changePercentageFAB, calculateTipFAB};
+
         int theme = sharedPreferences.getInt("theme", 0);
+
         for ( FloatingActionButton f : fabs){
             if (theme == 1){ //TODO implement Unified Fab Theming
                 f.setColorNormal(getResources().getColor(R.color.accentOrange));

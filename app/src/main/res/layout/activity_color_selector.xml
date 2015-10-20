@@ -98,9 +98,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/DarkThemeFAB"
             fab:fab_colorNormal="@color/black"
-            fab:fab_label="@string/black"
+            fab:fab_label="@string/toggleDarkTheme"
             android:onClick="toggleDarkTheme"/>
     </com.github.clans.fab.FloatingActionMenu>
+
 
 
 
