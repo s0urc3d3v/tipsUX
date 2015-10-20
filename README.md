@@ -1,4 +1,4 @@
-# UXfortips
+# TipsUX
 
 **A material tip calculator for android with style in mind**
 
