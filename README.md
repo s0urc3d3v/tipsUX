@@ -52,9 +52,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ````
 *****
-[I used the amazing System Icon libarary by Google](https://www.google.com/design/icons/index.html)
+[I used the amazing System Icon library by Google](https://www.google.com/design/icons/index.html)
 
-Licensed under the [CC-BY license](https://creativecommons.org/licenses/by/4.0/). License terms avaible [here](https://creativecommons.org/licenses/by/4.0/legalcode)
+Licensed under the [CC-BY license](https://creativecommons.org/licenses/by/4.0/). License terms avaible [here](https://creativecommons.org/licenses/by/4.0/legalcode) (The CC-BY only applies to the Google's system icons)
 
 *****
 ```
