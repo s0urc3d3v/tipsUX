@@ -6,7 +6,7 @@
 *****
 ![closed FAB theme 1](https://github.com/s0urc3d3v3l0pm3nt/UXfortips/blob/master/app/src/main/res/drawable/AppScreenshots/Screenshot_20151014-144218.png)   ![open FAB theme 1](https://github.com/s0urc3d3v3l0pm3nt/UXfortips/blob/master/app/src/main/res/drawable/AppScreenshots/Screenshot_20151014-144146.png)
 
-![closed FAB theme 2](https://github.com/s0urc3d3v3l0pm3nt/UXfortips/blob/master/app/src/main/res/drawable/AppScreenshots/Screenshot_20151014-144244.png)    ![open FAB theme 2](https://github.com/s0urc3d3v3l0pm3nt/UXfortips/blob/master/app/src/main/res/drawable/AppScreenshots/Screenshot_20151014-144237.png)
+![closed FAB theme 2](https://github.com/s0urc3d3v3l0pm3nt/UXfortips/blob/master/app/src/main/res/drawable/AppScreenshots/Screenshot_20151014-144237.png)    ![open FAB theme 2](https://github.com/s0urc3d3v3l0pm3nt/UXfortips/blob/master/app/src/main/res/drawable/AppScreenshots/Screenshot_20151014-144244.png)
 
 #Google Play
 *****
@@ -54,6 +54,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 *****
 [I used the amazing System Icon libarary by Google](https://www.google.com/design/icons/index.html)
 
-Licensed under the [CC-BY license](https://creativecommons.org/licenses/by/4.0/) [License terms avaible here](https://creativecommons.org/licenses/by/4.0/legalcode)
+Licensed under the [CC-BY license](https://creativecommons.org/licenses/by/4.0/). License terms avaible [here](https://creativecommons.org/licenses/by/4.0/legalcode)
 
 
