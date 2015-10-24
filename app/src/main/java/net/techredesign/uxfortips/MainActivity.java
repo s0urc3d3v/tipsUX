@@ -25,20 +25,24 @@ import java.util.List;
 public class MainActivity extends Activity {
 
     EditText subtotalInputFeildET;
-    String myPreferences = "net.techredesign.uxForTips";
+
     SharedPreferences sharedPreferences;
+
     TextView totalAndPromptView;
     TextView UITipView;
+
     AlertDialog dialog;
-    AlertDialog pathDialog;
-    int percent = 20;
-    String path = "";
+
     private double tip = 0;
     private double subtotal = 0;
     private double total = 0;
+
     Spinner serviceQualitySpinner;
+
     colorSelector colorSelector = new colorSelector();
+
     private static int themeValue = 0;
+
     static long localTaxPercent = 0;
     static long localTax;
 
@@ -56,16 +60,20 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         subtotalInputFeildET = (EditText) findViewById(R.id.subTotalInputFieldET);
+
         UITipView = (TextView) findViewById(R.id.tipViewUIwidgetTV);
         totalAndPromptView = (TextView) findViewById(R.id.PromptAndTotalTV);
 
         FloatingActionMenu menu1 = (FloatingActionMenu) findViewById(R.id.FABMenu);
         FloatingActionButton changePercentageFAB = (FloatingActionButton) findViewById(R.id.changePercentageFAB);
         FloatingActionButton calculateTipFAB = (FloatingActionButton) findViewById(R.id.calculateTipFAB);
-        FloatingActionButton[] fabs = {changePercentageFAB, calculateTipFAB};
 
-        int theme = sharedPreferences.getInt("theme", 0);
+        FloatingActionButton[] fabs = {changePercentageFAB, calculateTipFAB}; //Creates an array of the floating action buttons to make coloring theme easier
 
+        int theme = sharedPreferences.getInt("theme", 0); //Get the users theme (appResources contains the theme values)
+        /*
+        for-each floating action button in fabs[] color it according to the users theme
+         */
         for ( FloatingActionButton f : fabs){
             if (theme == 1){ //TODO implement Unified Fab Theming
                 f.setColorNormal(getResources().getColor(R.color.accentOrange));
@@ -168,15 +176,11 @@ public class MainActivity extends Activity {
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dismissView();
+                        dialog.dismiss();
                     }
                 });
         dialog = builder.create();
         dialog.show();
-    }
-
-    public void dismissView() { //workaround :(
-        dialog.dismiss();
     }
 
     public void openSettings() {
@@ -314,7 +318,9 @@ public class MainActivity extends Activity {
                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dismissView();
+                        if (dialog != null) {
+                            dialog.dismiss();
+                        }
                     }
                 });
         AlertDialog getTaxAsDialog = alertBuilder.create();

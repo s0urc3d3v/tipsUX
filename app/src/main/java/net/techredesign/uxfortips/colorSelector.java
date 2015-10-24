@@ -41,6 +41,7 @@ public class colorSelector extends Activity {
     private FloatingActionMenu menu;
     private Animation animation;
     private FloatingActionButton FABS[] = new FloatingActionButton[4];
+    private int theme = 1;
 
 
     @Override
@@ -128,11 +129,13 @@ public class colorSelector extends Activity {
             preferenceEditor.putInt("theme", 1);
             preferenceEditor.commit();
             applyThemePreview(1, false);
+            theme = 1;
         }
         else {
             preferenceEditor.putInt("theme", 2);
             preferenceEditor.commit();
             applyThemePreview(2, true);
+            theme = 2;
 
         }
     }
@@ -142,11 +145,13 @@ public class colorSelector extends Activity {
             preferenceEditor.putInt("theme", 3);
             preferenceEditor.commit();
             applyThemePreview(3, false);
+            theme = 3;
 
         } else {
             preferenceEditor.putInt("theme", 4);
             preferenceEditor.commit();
             applyThemePreview(4, true);
+            theme = 4;
 
         }
     }
@@ -157,12 +162,14 @@ public class colorSelector extends Activity {
             preferenceEditor.putInt("theme", 5);
             preferenceEditor.commit();
             applyThemePreview(5, false);
+            theme = 5;
 
         }
         else {
             preferenceEditor.putInt("theme", 6);
             preferenceEditor.commit();
             applyThemePreview(6, true);
+            theme = 6;
 
         }
     }
@@ -172,12 +179,14 @@ public class colorSelector extends Activity {
             preferenceEditor.putInt("theme", 6);
             preferenceEditor.commit();
             applyThemePreview(7, false);
+            theme = 7;
 
         } else {
             preferenceEditor.putInt("theme", 7);
             preferenceEditor.commit();
             actionBar = getActionBar();
             applyThemePreview(8, true);
+            theme = 8;
         }
     }
 
