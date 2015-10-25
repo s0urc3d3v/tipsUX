@@ -4,9 +4,9 @@
     <color name="primaryOrange">#FF5722</color>
     <color name="primaryDarkOrange">#E64A19</color>
     <!-- Accent purple color -->
-    <color name="accentOrange">#3F51B5</color>
-    <color name="accentDarkOrange">#303F9F</color>
-    <color name="backgroundOrange">#E91E63</color>
+    <color name="accentPurple">#3F51B5</color>
+    <color name="accentPurpleDark">#303F9F</color>
+    <color name="backgroundPinkOrangeTheme">#E91E63</color>
 
     <!--Teal theme colors -->
     <color name="primaryTeal">#009688</color>
@@ -31,6 +31,47 @@
     <color name="accentGreen">#F44336</color>
     <color name="accentDarkGreen">#D32F2F</color>
     <color name="backgroundGreen">#FFEBEE</color>
+
+    <!-- Pink theme colors -->
+    <color name="primaryPink">#E91E63</color>
+    <color name="primaryPinkDark">#C2185B</color>
+    <color name="backgroundPink">#FCE4EC</color>
+
+
+    <!-- Accent light green -->
+    <color name="accentLightGreen">#8BC34A</color>
+    <color name="accentLightGreenDark">#689F38</color>
+    <color name="backgroundLightGreen">#F1F8E9</color>
+
+    <!-- Purple theme colors -->
+    <color name="primaryPurple">#9C27B0</color>
+    <color name="primaryPurpleDark">#7B1FA2</color>
+    <color name="backgroundPurple">#F3E5F5</color>
+
+    <!-- Yellow accent colors -->
+    <color name="accentYellow">#FFEB3B</color>
+    <color name="accentYellowDark">#FBC02D</color>
+    <color name="backgroundYellow">#FFFDE7</color>
+
+    <!-- Deep purple theme colors -->
+    <color name="primaryDeepPurple">#673AB7</color>
+    <color name="primaryDeepPurpleDark">#512DA8</color>
+    <color name="backgroundDarkPurple">#EDE7F6</color>
+
+    <!-- Amber accent colors -->
+    <color name="accentAmber">#FFC107</color>
+    <color name="accentAmberDark">#FFA000</color>
+    <color name="backgroundAmber">#FFF8E1</color>
+
+    <!-- Indigo theme colors -->
+    <color name="primaryIndigo">#3F51B5</color>
+    <color name="primaryIndigoDark">#303F9F</color>
+    <color name="backgroundIndigo">#E8EAF6</color>
+
+    <!-- Orange accent colors -->
+    <color name="accentOrange">#FF9800</color>
+    <color name="accentOrangeDark">#F57C00</color>
+    <color name="orangeBackground">#FFF3E0</color>
 
     <!-- white and black -->
     <color name="black">#000000</color>

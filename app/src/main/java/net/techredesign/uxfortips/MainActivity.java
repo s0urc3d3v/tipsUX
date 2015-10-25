@@ -74,42 +74,13 @@ public class MainActivity extends Activity {
         /*
         for-each floating action button in fabs[] color it according to the users theme
          */
-        for ( FloatingActionButton f : fabs){
-            if (theme == 1){ //TODO implement Unified Fab Theming
-                f.setColorNormal(getResources().getColor(R.color.accentOrange));
-                f.setColorPressed(getResources().getColor(R.color.accentDarkOrange));
-                menu1.setMenuButtonColorNormal(getResources().getColor(R.color.accentOrange));
-                menu1.setMenuButtonColorPressed(getResources().getColor(R.color.accentDarkOrange));
-            }
-
-            else if (theme == 3){
-                f.setColorNormal(getResources().getColor(R.color.accentTeal));
-                f.setColorPressed(getResources().getColor(R.color.accentDarkTeal));
-                menu1.setMenuButtonColorNormal(getResources().getColor(R.color.accentTeal));
-                menu1.setMenuButtonColorPressed(getResources().getColor(R.color.accentDarkTeal));
-            }
-
-            else if (theme == 5){
-                f.setColorNormal(getResources().getColor(R.color.accentGreen));
-                f.setColorPressed(getResources().getColor(R.color.accentDarkGreen));
-                menu1.setMenuButtonColorNormal(getResources().getColor(R.color.accentGreen));
-                menu1.setMenuButtonColorPressed(getResources().getColor(R.color.accentDarkGreen));
-            }
-
-            else if (theme == 7){
-                f.setColorNormal(getResources().getColor(R.color.accentRed));
-                f.setColorPressed(getResources().getColor(R.color.accentDarkRed));
-                menu1.setMenuButtonColorNormal(getResources().getColor(R.color.accentRed));
-                menu1.setMenuButtonColorPressed(getResources().getColor(R.color.accentDarkRed));
-            }
-
-            else {
-                f.setColorNormal(getResources().getColor(R.color.accentOrange));
-                f.setColorPressed(getResources().getColor(R.color.accentDarkOrange));
-                menu1.setMenuButtonColorNormal(getResources().getColor(R.color.accentOrange));
-                menu1.setMenuButtonColorPressed(getResources().getColor(R.color.accentDarkOrange));
-            }
+        for ( FloatingActionButton f : fabs) {
+            f.setColorNormal(getResources().getColor(appResources.getPrimaryAccentColor(theme)));
+            f.setColorPressed(getResources().getColor(appResources.getThemeAccentDark(theme)));
+            menu1.setMenuButtonColorNormal(getResources().getColor(appResources.getPrimaryAccentColor(theme)));
+            menu1.setMenuButtonColorPressed(getResources().getColor(appResources.getThemeAccentDark(theme)));
         }
+
         menus.add(menu1);
         menu1.setClosedOnTouchOutside(true);
         menu1.setIconAnimated(true);

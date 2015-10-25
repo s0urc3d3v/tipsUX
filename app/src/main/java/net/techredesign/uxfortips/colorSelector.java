@@ -190,8 +190,71 @@ public class colorSelector extends Activity {
         }
     }
 
+    public void pink(View view){
+        layout.setBackgroundColor(getResources().getColor(R.color.primaryPink));
+        if (!sharedPreferences.getBoolean("dark", false)){
+            preferenceEditor.putInt("theme", 9);
+            preferenceEditor.commit();
+            actionBar = getActionBar();
+            applyThemePreview(9, false);
+            theme = 9;
+        }
+        else {
+            preferenceEditor.putInt("theme", 10);
+            preferenceEditor.commit();
+            actionBar = getActionBar();
+            applyThemePreview(10, true);
+            theme = 10;
+        }
+    }
+    public void purple(View view){
+        layout.setBackgroundColor(getResources().getColor(R.color.primaryPurple));
+        if (!sharedPreferences.getBoolean("dark", false)) {
+            preferenceEditor.putInt("theme", 11);
+            preferenceEditor.commit();
+            applyThemePreview(11, false);
+            theme = 11;
 
+        } else {
+            preferenceEditor.putInt("theme", 12);
+            preferenceEditor.commit();
+            actionBar = getActionBar();
+            applyThemePreview(12, true);
+            theme = 12;
+        }
+    }
+    public void deepPurple(View view){
+        layout.setBackgroundColor(getResources().getColor(R.color.primaryDeepPurple));
+        if (!sharedPreferences.getBoolean("dark", false)) {
+            preferenceEditor.putInt("theme", 13);
+            preferenceEditor.commit();
+            applyThemePreview(13, false);
+            theme = 13;
 
+        } else {
+            preferenceEditor.putInt("theme", 14);
+            preferenceEditor.commit();
+            actionBar = getActionBar();
+            applyThemePreview(14, true);
+            theme = 14;
+        }
+    }
+    public void indigo(View view){
+        layout.setBackgroundColor(getResources().getColor(R.color.primaryIndigo));
+        if (!sharedPreferences.getBoolean("dark", false)) {
+            preferenceEditor.putInt("theme", 15);
+            preferenceEditor.commit();
+            applyThemePreview(15, false);
+            theme = 15;
+
+        } else {
+            preferenceEditor.putInt("theme", 16);
+            preferenceEditor.commit();
+            actionBar = getActionBar();
+            applyThemePreview(16, true);
+            theme = 16;
+        }
+    }
 
     public void toggleDarkTheme(View view){
         if (!sharedPreferences.getBoolean("dark", false)){

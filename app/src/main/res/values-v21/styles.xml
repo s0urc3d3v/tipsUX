@@ -55,4 +55,60 @@
         <item name="android:colorPrimaryDark">@color/primaryDarkRed</item>
         <item name="android:colorAccent">@color/accentRed</item>
     </style>
+    
+    <!-- Pink theme configuration -->
+    <style name="pinkThemeLight" parent="android:Theme.Material.Light">
+        <item name="android:colorPrimary">@color/primaryPink</item>
+        <item name="android:colorPrimaryDark">@color/primaryPinkDark</item>
+        <item name="android:colorAccent">@color/accentLightGreen</item>
+    </style>
+
+    <!-- Pink dark theme configuration -->
+    <style name="pinkThemeDark" parent="android:Theme.Material">
+        <item name="android:colorPrimary">@color/primaryPink</item>
+        <item name="android:colorPrimaryDark">@color/primaryPinkDark</item>
+        <item name="android:colorAccent">@color/accentLightGreen</item>
+    </style>
+    <!-- Purple theme configuration -->
+    <style name="purpleThemeLight" parent="android:Theme.Material.Light">
+        <item name="android:colorPrimary">@color/primaryPurple</item>
+        <item name="android:colorPrimaryDark">@color/primaryPurpleDark</item>
+        <item name="android:colorAccent">@color/accentYellow</item>
+    </style>
+
+    <!-- purple dark theme configuration -->
+    <style name="purpleThemeDark" parent="android:Theme.Material">
+        <item name="android:colorPrimary">@color/primaryPurple</item>
+        <item name="android:colorPrimaryDark">@color/primaryPurpleDark</item>
+        <item name="android:colorAccent">@color/accentYellow</item>
+    </style>
+
+    <!-- Deep purple theme configuration -->
+    <style name="deepPurpleThemeLight" parent="android:Theme.Material.Light">
+        <item name="android:colorPrimary">@color/primaryDeepPurple</item>
+        <item name="android:colorPrimaryDark">@color/primaryDeepPurpleDark</item>
+        <item name="android:colorAccent">@color/accentAmber</item>
+    </style>
+
+    <!-- Deep purple dark theme configuration -->
+    <style name="deepPurpleThemeDark" parent="android:Theme.Material">
+        <item name="android:colorPrimary">@color/primaryDeepPurple</item>
+        <item name="android:colorPrimaryDark">@color/primaryDeepPurpleDark</item>
+        <item name="android:colorAccent">@color/accentAmber</item>
+    </style>
+
+    <!-- Indigo theme configuration -->
+    <style name="indigoThemeLight" parent="android:Theme.Material.Light">
+        <item name="android:colorPrimary">@color/primaryIndigo</item>
+        <item name="android:colorPrimaryDark">@color/primaryIndigoDark</item>
+        <item name="android:colorAccent">@color/accentOrange</item>
+    </style>
+
+    <!-- Indigo dark theme configuration -->
+    <style name="indigoThemeDark" parent="android:Theme.Material">
+        <item name="android:colorPrimary">@color/primaryIndigo</item>
+        <item name="android:colorPrimaryDark">@color/primaryIndigoDark</item>
+        <item name="android:colorAccent">@color/accentOrange</item>
+    </style>
+
 </resources>

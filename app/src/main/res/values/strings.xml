@@ -131,12 +131,18 @@ limitations under the License.
     <string name="GoogleIconLicenseText">Icons are licensed under the CC-BY license here: https://creativecommons.org/licenses/by/4.0/legalcode.  The icons can be found here: https://www.google.com/design/icons/</string>
     <string name="FABdialogTitle">Floating Action Button Library by Clans</string>
     <string name="NoticeOfLicensesUsed">Notice of licensed used in this software</string>
+    <!-- Colors for fab labels -->
     <string name="red">Red</string>
     <string name="green">Green</string>
     <string name="teal">Teal</string>
     <string name="orange">Orange</string>
+    <string name="pink">Pink</string>
+    <string name="purple">Purple</string>
+    <string name="deepPurple">Deep Purple</string>
+    <string name="indigo">Indigo</string>
     <string name="toggleDarkTheme">Toggle Dark Theme</string>
     <string name="black">Black</string>
+
     <string name="darkThemeEnabled">Enabled Dark Theme</string>
     <string name="darkThemeDisabled">Disabled Dark theme</string>
     <string name="lightTheme">Light Theme</string>
