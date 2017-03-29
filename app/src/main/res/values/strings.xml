@@ -6,8 +6,6 @@
     <string name="title_activity_settings">settings</string>
     <string name="total">Total</string>
     <string name="cancel">Cancel</string>
-    <string name="pleaseEnterValidPercent">Please enter a valid percentage</string>
-    <string name="invalidNumer">That is not a valid numer :)</string>
     <string name="invalidSubtotalWarning">Invalid subtotal</string>
     <string name="tipView">Tip: $</string>
     <string name="totalView">Total: $</string>
@@ -18,18 +16,22 @@
     <string name="errorGettingDirectory">Error: could not get directory</string>
     <string name="externalStorageNotWritableError">Internal storage does not seem to be writable; However it is readable.  Try rebooting?</string>
     <string name="externalStorageNotAccessable">Your internal storage is not writable.  This permission is required to save your spendings</string>
-    <string name="writeError">Error: could not write to external storage</string>
     <string name="tipPromptForFile">Tip:</string>
     <string name="totalPromptForFile">Total:</string>
     <string name="tab">    </string>
     <string name="lineFormatting">----------------------------------------------------------</string>
-    <string name="spendingHeader">Here ar                prefEditor.putInt("theme", themeValue);
-e your spendings</string>
-    <string name="fileClaimsToExistButCanBeFound">Sorry: the file claims to exist but can not be found</string>
+    <string name="spendingHeader">Here are your spendings</string>
     <string name="writeFinished">File has been written to your documents folder</string>
 
     <!--Error Strings-->
     <string name="noSubtotalError">You have not entered a subtotal</string>
+    <string name="fileClaimsToExistButCanBeFound">Sorry: the file claims to exist but can not be found</string>
+    <string name="invalidNumer">That is not a valid numer :)</string>
+    <string name="writeError">Error: could not write to external storage</string>
+
+
+    <!--Prompt Strings-->
+    <string name="pleaseEnterValidPercent">Please enter a valid percentage</string>
 
     <string name="aboutLabel">About</string>
     <string name="title_activity_licenses">licenses</string>
