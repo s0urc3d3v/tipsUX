@@ -1,21 +1,43 @@
 <resources>
+    <!--App-->
     <string name="app_name">TipsUX</string>
-    <string name="action_settings">Settings</string>
+    <string name="packageName">net.techredesign.uxForTips</string>
+    <string name="snackBarLicenseTextTitle">SnackBar library by nispok</string>
+    <string name="title_activity_credits">credits</string>
+    <string name="GoogleIconLicenseTextTitle">Google Material Icon Library</string>
+    <string name="credits">Credits</string>
+    <string name="aboutLabel">About</string>
+    <string name="title_activity_licenses">Licenses</string>
+
+    <!--Basic strings-->
     <string name="welcome">Calculate your tip</string>
-    <string name="percentagePositiveButtonPrompt">Change Percent</string>
+    <string name="action_settings">Settings</string>
     <string name="title_activity_settings">settings</string>
     <string name="total">Total</string>
     <string name="cancel">Cancel</string>
-    <string name="invalidSubtotalWarning">Invalid subtotal</string>
+    <string name="saveMySpendings">Save my spending</string>
+    <string name="givePathPrompt">Save spending to file</string>
+    <string name="saveToFile">Save spending to file</string>
+    <string name="title_activity_about">about</string>
+    <string name="restartApp">Apply</string>
+    <string name="comingSoon">Coming Soon!</string>
+    <string name="save">Save</string>
+    <string name="undoTax">Undo Tax</string>
+    <string name="undoTip">Undo Tip</string>
+    <string name="preferedTip">Defualt tip</string>
+
+    <!--Basic success strings-->
+    <string name="taxSet">Tax Set!</string>
+    <string name="tipSet">Tip Set!</string>
+
+    <!--Prompts-->
+    <string name="percentagePositiveButtonPrompt">Change Percent</string>
+    <string name="serviceQualityPrompt">Select a service quality below</string>
+    <string name="localTaxPrompt">Local Tax</string>
+
+    <!--Partial Strings-->
     <string name="tipView">Tip: $</string>
     <string name="totalView">Total: $</string>
-    <string name="saveMySpendings">Save my spendings</string>
-    <string name="givePathPrompt">Save spendings to file</string>
-    <string name="saveToFile">Save spendings to file</string>
-    <string name="filename">spendings.txt</string>
-    <string name="errorGettingDirectory">Error: could not get directory</string>
-    <string name="externalStorageNotWritableError">Internal storage does not seem to be writable; However it is readable.  Try rebooting?</string>
-    <string name="externalStorageNotAccessable">Your internal storage is not writable.  This permission is required to save your spendings</string>
     <string name="tipPromptForFile">Tip:</string>
     <string name="totalPromptForFile">Total:</string>
     <string name="tab">    </string>
@@ -28,13 +50,25 @@
     <string name="fileClaimsToExistButCanBeFound">Sorry: the file claims to exist but can not be found</string>
     <string name="invalidNumer">That is not a valid numer :)</string>
     <string name="writeError">Error: could not write to external storage</string>
-
+    <string name="errorGettingDirectory">Error: could not get directory</string>
+    <string name="externalStorageNotAccessable">Your internal storage is not writable.  This permission is required to save your spendings</string>
+    <string name="externalStorageNotWritableError">Internal storage does not seem to be writable; However it is readable.  Try rebooting?</string>
+    <string name="invalidSubtotalWarning">Invalid subtotal</string>
+    <string name="failedToParseTax">Failed to parse tax</string>
+    <string name="genericError">Sorry, an error has occurred</string>
+    <string name="invalidTax">Invalid tax</string>
+    <string name="faildToParseInt">Sorry, parsing failed</string>
+    <string name="themePrefsNotFoundErrorExplaination">Sorry; your theme preferences could not be loaded.  Setting default theme…</string>
 
     <!--Prompt Strings-->
     <string name="pleaseEnterValidPercent">Please enter a valid percentage</string>
+    <string name="UItotalPrompt">Total: $</string>
+    <string name="UITipPrompt">Tip: $</string>
 
-    <string name="aboutLabel">About</string>
-    <string name="title_activity_licenses">licenses</string>
+    <!--Other-->
+    <string name="filename">spendings.txt</string>
+
+
     <string-array name="serviceQualities">
         <item>Excellent</item>
         <item>Good</item>
@@ -43,25 +77,33 @@
         <item>Terrible</item>
         <item>Custom</item>
     </string-array>
-    <string name="serviceQualityPrompt">Select a service quality below</string>
+
+    <!--Theming-->
     <string name="title_activity_color_selector">colorSelector</string>
     <string name="darkThemeSwitch">Dark theme</string>
-    <string name="themePrefsNotFoundErrorExplaination">Sorry; your theme preferances could not be loaded.  Setting defualt theme...</string>
     <string name="themeAction">Themes</string>
-    <string name="comingSoon">Coming Soon!</string>
-    <string name="creativeCommonsLicense">I used icons from Google licensed under the creative commons CC-BY (Creative Commons attribution license: https://creativecommons.org/licenses/by/4.0/.  License here:  https://creativecommons.org/licenses/by/4.0/legalcode</string>
-    <string name="title_activity_about">about</string>
-    <string name="localTaxPrompt">Local Tax</string>
-    <string name="save">Save</string>
-    <string name="failedToParseTax">Failed to parse tax</string>
-    <string name="genericError">Sorry, an error has occured</string>
-    <string name="empty" />
-    <string name="UItotalPrompt">Total: $</string>
-    <string name="UITipPrompt">Tip: $</string>
-    <string name="invalidTax">Invalid tax</string>
-    <string name="preferedTip">Defualt tip</string>
-    <string name="faildToParseInt">Sorry, parsing failed</string>
     <string name="darkThemeBtn">Dark Theme</string>
+
+
+    <!-- Colors for fab labels -->
+    <string name="red">Red</string>
+    <string name="green">Green</string>
+    <string name="teal">Teal</string>
+    <string name="orange">Orange</string>
+    <string name="pink">Pink</string>
+    <string name="purple">Purple</string>
+    <string name="deepPurple">Deep Purple</string>
+    <string name="indigo">Indigo</string>
+    <string name="toggleDarkTheme">Toggle Dark Theme</string>
+    <string name="black">Black</string>
+
+    <string name="darkThemeEnabled">Enabled Dark Theme</string>
+    <string name="darkThemeDisabled">Disabled Dark theme</string>
+    <string name="lightTheme">Light Theme</string>
+    <string name="darkTheme">Dark Theme</string>
+
+    <!-- Licenses-->
+    <string name="creativeCommonsLicense">I used icons from Google licensed under the creative commons CC-BY (Creative Commons attribution license: https://creativecommons.org/licenses/by/4.0/.  License here:  https://creativecommons.org/licenses/by/4.0/legalcode</string>
     <string name="snackbarLibararyLicense">The MIT License (MIT)
 
 Copyright (c) 2015 William Mora
@@ -78,17 +120,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</string>
-    <string name="taxSet">Tax Set!</string>
-    <string name="tipSet">Tip Set!</string>
-    <string name="undoTax">Undo Tax</string>
-    <string name="undoTip">Undo Tip</string>
-    <string name="packageName">net.techredesign.uxForTips</string>
-    <string name="title_activity_credits">credits</string>
+
     <string name="creditClansFab">I used the Floating Action Button Library by Clans: https://github.com/Clans/FloatingActionButton licensed under the Apache License</string>
     <string name="creditGoogleIcons">I used icons from google icon library: https://www.google.com/design/icons/ licensed under the CC-BY license</string>
     <string name="creditSnackBar">I used the nispoc snackbar library: https://github.com/nispok/snackbar licensed under the MIT license</string>
     <string name="moreInfoNotice">For more info and full license information go to the main view, click the action overflow and select "about"</string>
-    <string name="credits">Credits</string>
     <string name="snackBarLicenseText">
         The library can be found here: https://github.com/nispok/snackbar
         The license is as follows:
@@ -109,7 +145,6 @@ TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONIN
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 </string>
-    <string name="snackBarLicenseTextTitle">SnackBar library by nispok</string>
     <string name="FABLicenseTextForDialog">
         Find the library here:
         https://github.com/Clans/FloatingActionButton
@@ -132,27 +167,10 @@ limitations under the License.
     He used android-floating-action-button library by Jerzy Chalupski as a base for development: https://github.com/futuresimple/android-floating-action-button.
 
 </string>
-    <string name="GoogleIconLicenseTextTitle">Google Material Icon Library</string>
     <string name="GoogleIconLicenseText">Icons are licensed under the CC-BY license here: https://creativecommons.org/licenses/by/4.0/legalcode.  The icons can be found here: https://www.google.com/design/icons/</string>
     <string name="FABdialogTitle">Floating Action Button Library by Clans</string>
     <string name="NoticeOfLicensesUsed">Notice of licensed used in this software</string>
-    <!-- Colors for fab labels -->
-    <string name="red">Red</string>
-    <string name="green">Green</string>
-    <string name="teal">Teal</string>
-    <string name="orange">Orange</string>
-    <string name="pink">Pink</string>
-    <string name="purple">Purple</string>
-    <string name="deepPurple">Deep Purple</string>
-    <string name="indigo">Indigo</string>
-    <string name="toggleDarkTheme">Toggle Dark Theme</string>
-    <string name="black">Black</string>
 
-    <string name="darkThemeEnabled">Enabled Dark Theme</string>
-    <string name="darkThemeDisabled">Disabled Dark theme</string>
-    <string name="lightTheme">Light Theme</string>
-    <string name="darkTheme">Dark Theme</string>
-    <string name="restartApp">Apply</string>
 
 </resources>
 
