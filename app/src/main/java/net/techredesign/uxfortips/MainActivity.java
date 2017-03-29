@@ -120,12 +120,9 @@ public class MainActivity extends Activity {
 
     public void calc(View view) {
         double userSubtotal = getUserSubtotalInput();
-        //Log.w("USER SUBTOTAL: ", String.valueOf(userSubtotal));
         double tip = getTip(userSubtotal);
-        //Log.w("TIP: ", String.valueOf(tip));
         double tax = getTax(userSubtotal);
         double total = getTotal(userSubtotal, tip, tax);
-        //Log.w("TOTAL: ", String.valueOf(total));
         setTotalOnUI(total);
         setTipOnUI(tip);
         //Log.w("Tax", String.valueOf(tax));
@@ -164,6 +161,7 @@ public class MainActivity extends Activity {
         try {
             subtotal = Double.valueOf(subtotalInputFeildET.getText().toString());
         } catch (Exception exception) {
+            Toast.makeText(getApplicationContext(), getString(R.string.noSubtotalError), Toast.LENGTH_SHORT);
             exception.printStackTrace();
         }
         tip = subtotal * 0.2;
@@ -179,18 +177,43 @@ public class MainActivity extends Activity {
         startActivity(new Intent(this, colorSelector.class));
     }
 
-    //computational methods
-    public double getTip(double subtotal){ //BROKEN
-        int tipAsWholeNum = sharedPreferences.getInt("tip", 20);
-        return subtotal * (tipAsWholeNum * 0.01);
+    //Start computational methods
+
+    /**
+     * Adds the wanted tip to the subtotal and returns the new subtotal
+     *
+     * Takes the stored tip from memory and applies it.  If it can not find the desired tip it returns -1 as
+     * an error
+     * @param subtotal Subtotal before tip
+     * @return Subtotal with tip applied
+     */
+    public double getTip(double subtotal){
+        int tipAsWholeNum = sharedPreferences.getInt("tip", 100);
+        if (tipAsWholeNum == 100) return -1;
+        else return subtotal * (tipAsWholeNum * 0.01);
     }
+
+    /**
+     * Adds total tip and tax to get
+     * @param sTotal
+     * @param tip
+     * @param tax
+     * @return Total of total tip and tax.
+     */
     public double getTotal(double sTotal, double tip, double tax){
-        Log.w("subtotal: ", String.valueOf(sTotal));
-        Log.w("tip: ", String.valueOf(tip));
-        Log.w("Tax: ", String.valueOf(tax));
         return sTotal + tip + tax;
     }
-    public double getTax(double total){ //treat 0 as an exception
+
+    /**
+     * Returns the total with local tax included.
+     *
+     * Takes the local tax as an whole number (int) from preferences storage.  Then it converts it to a decimal.
+     * Lastly it applies the tax to the subtotal input.
+     * a return value of -1 is an error
+     * @param total subtotal without tax
+     * @return subtotal with tax
+     */
+    public double getTax(double total){
         int localTaxAsWholeNum = sharedPreferences.getInt("tax", 0);
         if (localTaxAsWholeNum != 0){
             return (total * (localTaxAsWholeNum * 0.01));
@@ -198,7 +221,7 @@ public class MainActivity extends Activity {
         else {
             getTaxFromUserWithDialog();
         }
-        return 0;
+        return -1;
     }
     //end computational methods
     

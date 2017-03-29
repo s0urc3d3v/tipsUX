@@ -27,7 +27,10 @@
 e your spendings</string>
     <string name="fileClaimsToExistButCanBeFound">Sorry: the file claims to exist but can not be found</string>
     <string name="writeFinished">File has been written to your documents folder</string>
+
+    <!--Error Strings-->
     <string name="noSubtotalError">You have not entered a subtotal</string>
+
     <string name="aboutLabel">About</string>
     <string name="title_activity_licenses">licenses</string>
     <string-array name="serviceQualities">
